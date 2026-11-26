@@ -21,8 +21,9 @@ sndB.onclick=function(){muted=!muted;music.muted=muted;sndB.textContent=muted?'�
 var timers=[];
 function later(fn,ms){timers.push(setTimeout(fn,ms))}
 function show(h){var d=document.createElement('div');d.className='scene';d.innerHTML=h;stage.innerHTML='';stage.appendChild(d);return d}
-/* whole photo always inside the frame: blurred copy fills the screen, the full image sits on top */
-function bg(src,mode,dim){var u='url('+A+src+')';return '<div class="bgfill" style="background-image:'+u+'"></div><div class="bg fit '+(mode||'kin').split(' ')[0]+'" style="background-image:'+u+'"></div><div class="dim" style="background:'+(dim||'rgba(0,0,0,.25)')+'"></div>'}
+/* full-screen photo, anchored on what matters: faces for portraits, heads for group shots */
+function kindOf(src){return src.indexOf('-group-')>-1?'group':src.indexOf('place-')===0?'place':'face'}
+function bg(src,mode,dim){var u='url('+A+src+')',k=kindOf(src);return (k==='group'?'<div class="bgfill" style="background-image:'+u+'"></div>':'')+'<div class="bg '+k+' '+(mode||'kin').split(' ')[0]+'" style="background-image:'+u+'"></div><div class="dim" style="background:'+(dim||'rgba(0,0,0,.25)')+'"></div>'}
 function fx(n){var h='<div class="fx">';for(var i=0;i<n;i++){var sz=KEY==='s1'?(2+Math.random()*5):(3+Math.random()*11); /* S2: soft floating bokeh */h+='<i style="left:'+(Math.random()*100)+'%;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(6+Math.random()*8)+'s;animation-delay:-'+(Math.random()*12)+'s;opacity:'+(.4+Math.random()*.6)+'"></i>'}return h+'</div>'}
 var tc0=0;
 function rec(cam){return '<div class="rec"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="r">REC</span><span class="tc" id="tc">00:00:00:00</span><span class="cam">'+(cam||'CAM 02 · INTERVIEW')+'</span></div>'}
@@ -36,13 +37,13 @@ var trans=KEY==='s1'?'<div class="flash"></div>':'<div class="glow"></div>';
 function sOpen(top,sub){return function(){show('<div class="big"><div class="sm" style="animation-delay:.1s">'+top+'</div><div style="animation-delay:.5s;font-size:clamp(22px,5vw,40px)">'+sub+'</div></div>')}}
 function sQuestion(q,cam){return function(){var s=show(rec(cam)+'<div class="qt"><small>INTERVIEW</small><div id="ty"></div></div>');type(s.querySelector('#ty'),q,70)}}
 function sInterview(id,img,ans,cam){var c=C[id];return function(){show(bg(img,'kin face','linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.05) 40%,rgba(0,0,0,.65))')+rec(cam)+'<div class="who"><b>'+c[0]+'</b><span>'+c[1]+'세 · '+c[2]+'</span></div><div class="sub"><span>“'+ans+'”</span></div>'+trans)}}
-function sQuote(id,q,label){var c=C[id];return function(){show(bg(face(id),'kout face','rgba(0,0,0,.12)')+fx(14)+'<div class="vtag">'+label+'</div><div class="vcap"><span><em>'+c[0]+' · '+c[1]+'세</em>'+q+'</span></div>'+trans)}}
+function sQuote(id,q,label){var c=C[id];return function(){show(bg(face(id),'kout face','rgba(0,0,0,.12)')+fx(14)+'<div class="vcap"><span><em>'+c[0]+' · '+c[1]+'세</em>'+q+'</span></div>'+trans)}}
 function sBig(lines,bgsrc,dim){return function(){var h=lines.map(function(l,i){var cls=l.charAt(0)==='!'?' class="hl"':l.charAt(0)==='~'?' class="sm"':'';return '<div'+cls+' style="animation-delay:'+(.15+i*.55)+'s">'+l.replace(/^[!~]/,'')+'</div>'}).join('');show((bgsrc?bg(bgsrc,'pan',dim||'rgba(0,0,0,.6)'):'')+fx(KEY==='s1'?30:20)+'<div class="big">'+h+'</div>')}}
 function sPlace(src,label,mode){return function(){show(bg(src,mode||'pan','rgba(0,0,0,.2)')+fx(18)+'<div class="vcap"><span>'+label+'</span></div>'+trans)}}
 function sGroup(src,line,mode){return function(){show(bg(src,mode||'kin','linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.2) 55%,rgba(0,0,0,.65))')+fx(30)+'<div class="sub"><span>'+line+'</span></div>')}}
 function sGrid(cap){return function(){var h=IDS.map(function(id,i){return '<div style="animation-delay:'+(i*.32)+'s"><img src="'+A+face(id)+'" alt=""><span>'+C[id][0]+'</span></div>'}).join('')+'<div class="q" style="animation-delay:'+(IDS.length*.32)+'s">?</div>';show(fx(20)+'<div class="grid">'+h+'</div><div class="gridcap" style="animation-delay:'+(IDS.length*.32+.6)+'s">'+cap+'</div>')}}
 /* highlight montage: situational shots, one per beat */
-function sMontage(list){return function(){var h=list.map(function(src,i){var u='url('+A+src+')';return '<div style="animation-delay:'+(i*MSTEP)+'s;--md:'+MSTEP+'s"><i style="background-image:'+u+'"></i><b style="background-image:'+u+'"></b></div>'}).join('');show('<div class="mont">'+h+'</div><div class="dim" style="background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45))"></div>'+fx(20))}}
+function sMontage(list){return function(){var h=list.map(function(src,i){var u='url('+A+src+')';return '<div style="animation-delay:'+(i*MSTEP)+'s;--md:'+MSTEP+'s"><b style="background-image:'+u+'"></b></div>'}).join('');show('<div class="mont">'+h+'</div><div class="dim" style="background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45))"></div>'+fx(20))}}
 function sTitle(k,t1,t2,t3,dim){return function(){show('<div class="dim" style="background:'+dim+'"></div>'+fx(KEY==='s1'?46:36)+'<div class="tt"><div class="k">'+k+'</div><div class="t1">'+t1+'</div><div class="t2">'+t2+'</div><div class="t3">'+t3+'</div></div>'+trans)}}
 function airStatus(){var d=new Date(),y=d.getFullYear(),st=new Date(y,10,24),en=new Date(y,11,26);if(d<st)return '첫 방송 D-'+Math.ceil((st-d)/864e5);if(d<en)return 'EP.'+('0'+(Math.floor((d-st)/864e5)+1)).slice(-2)+' 지금 방송 중';return '전 회차 다시보기'}
 
@@ -65,12 +66,12 @@ s1:{rate:'all',mont:M1,end:{bg:'s1-group-2.png',dim:'rgba(244,236,223,.55)',titl
   [beats(4),sPlace('place-house-01.png','설산 위의 WINTER HOUSE','kin'),'scene'],
   [beats(4),sGroup('s1-group-1.png','첫눈이 내리던 날,'),'scene'],
   [beats(4),sGroup('s1-group-2.png','낯선 사람들이 같은 집에 도착했다','kout'),'scene'],
-  [beats(4),sQuote('yeonwoo','여기 자리 있어요. 컵은 누가 이렇게 예쁘게 골라 놨어요?','FIRST IMPRESSION'),'quote'],
-  [beats(4),sQuote('taegyeom','돌려 말하는 건 잘 못해요. 같이 걸을래요?','FIRST IMPRESSION'),'quote'],
-  [beats(4),sQuote('haerin','첫인상으로 판단하진 않아요. 기억은 해 두지만요.','FIRST IMPRESSION'),'quote'],
+  [beats(4),sQuote('yeonwoo','여기 자리 있어요. 컵은 누가 이렇게 예쁘게 골라 놨어요?'),'quote'],
+  [beats(4),sQuote('taegyeom','돌려 말하는 건 잘 못해요. 같이 걸을래요?'),'quote'],
+  [beats(4),sQuote('haerin','첫인상으로 판단하진 않아요. 기억은 해 두지만요.'),'quote'],
   [beats(7),sGrid('그리고, 아직 도착하지 않은 한 사람'),'grid'],
-  [ASK,sBig(['첫인상은','!끝까지 갈 수 있을까']),'ask'],
-  [ASK,sBig(['크리스마스 아침,','!웃는 사람은 누구일까']),'ask'],
+  [ASK,sBig(['첫인상은,','!그대로일까']),'ask'],
+  [ASK,sBig(['크리스마스 아침은,','!누구와 맞이할까']),'ask'],
   [6000,sMontage(M1),'mont'],
   [6500,sTitle('JINGLE TV ORIGINAL','MISTLETOE','SEASON 01 · 《미슬토우》','겨울, 사랑이 내리는 순간.','radial-gradient(circle at 50% 45%,#fffaf2,#efe3d0 75%)'),'title']
  ]},
@@ -87,9 +88,9 @@ s2:{rate:'r19',mont:M2,end:{bg:'s2-group-1.png',dim:'rgba(11,6,8,.6)',title:'AFT
   [beats(4),sPlace('place-house2-03.png','VELVET BAR'),'scene'],
   [beats(4),sGroup('s2-group-1.png','밤이 깊어질수록,'),'scene'],
   [beats(4),sGroup('s2-group-2.png','마음은 더 솔직해진다','kout'),'scene'],
-  [beats(4),sQuote('igeon','와, 분위기부터 돈 좀 썼네. 여기 진짜 크리스마스 맞죠?','FIRST IMPRESSION'),'quote'],
-  [beats(4),sQuote('jaeheon','아까와 향이 달라졌네요. 조금 더 가벼운 쪽으로.','FIRST IMPRESSION'),'quote'],
-  [beats(4),sQuote('iseo','처음 오셨으면 규칙부터 확인하는 게 편할 거예요.','FIRST IMPRESSION'),'quote'],
+  [beats(4),sQuote('igeon','와, 분위기부터 돈 좀 썼네. 여기 진짜 크리스마스 맞죠?'),'quote'],
+  [beats(4),sQuote('jaeheon','아까와 향이 달라졌네요. 조금 더 가벼운 쪽으로.'),'quote'],
+  [beats(4),sQuote('iseo','처음 오셨으면 규칙부터 확인하는 게 편할 거예요.'),'quote'],
   [beats(7),sGrid('그리고, 오늘 밤 도착할 한 사람'),'grid'],
   [ASK,sBig(['오늘 밤,','!누구 옆에 앉을까']),'ask'],
   [ASK,sBig(['크리스마스의 끝,','!누구의 손을 잡을까']),'ask'],
@@ -120,7 +121,9 @@ function play(){
   cancelAnimationFrame(raf);clear();idx=0;skipB.style.display='';setRate(SCRIPT.rate);tc0=Date.now();startWall=Date.now();
   prog.style.transition='none';prog.style.width='0';
   useMusic=true;music.muted=muted;
-  var at=+(new URLSearchParams(location.search).get('at')||0); /* hidden: ?at=seconds jumps ahead (for checking a scene) */
+  var q=new URLSearchParams(location.search);
+  if(q.has('scene')){setRate(SCRIPT.rate);SCRIPT.T[+q.get('scene')][1]();return} /* hidden: ?scene=N freezes one scene (layout check), no music */
+  var at=+(q.get('at')||0); /* hidden: ?at=seconds jumps ahead (for checking a scene) */
   startWall=Date.now()-at*1000;
   try{music.currentTime=at}catch(err){}
   var p=music.play();if(p&&p.catch)p.catch(function(){useMusic=false;startWall=Date.now()-at*1000});
