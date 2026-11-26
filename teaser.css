@@ -136,3 +136,16 @@ body.s2{--acc:#c23a55;--acc2:#d4af6a;--soft:#160b10;--sub:#f6e2b3;--vc:#d4af6a;-
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;animation-iteration-count:1!important}}
 .snd{position:fixed;left:14px;bottom:calc(5.5vh + 14px);z-index:23;background:rgba(0,0,0,.45);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:99px;padding:7px 14px;font-size:12.5px;font-weight:700;cursor:pointer;backdrop-filter:blur(4px);font-family:inherit}
 .start .hint{display:block;font-size:11.5px;opacity:.65;margin-top:8px}
+/* ── S2 romance tone: warm glow cuts, floating bokeh, rose-gold camera frame ── */
+.glow{position:absolute;inset:0;z-index:12;pointer-events:none;background:radial-gradient(circle at 50% 45%,rgba(255,196,160,.55),rgba(194,58,85,.35) 45%,transparent 75%);animation:glow .7s ease-out both}
+@keyframes glow{from{opacity:1}to{opacity:0}}
+.s2 .fx i{top:auto;bottom:-20px;background:radial-gradient(circle,rgba(255,214,170,.95),rgba(242,170,120,.35) 60%,transparent 70%);box-shadow:none;filter:blur(1px);animation-name:rise}
+@keyframes rise{from{transform:translate3d(0,0,0)}to{transform:translate3d(-30px,-115vh,0)}}
+.s2 .rec i.c{border-color:rgba(242,196,140,.9)}
+.s2 .rec .r:before{background:#ff6b8a}
+.s2 .rec{color:#f6e2c8}
+.s2 .who b{color:#fff2e6}
+.s2 .sub span{color:#ffe1c4}
+.s2 .big .hl{color:#ff8fa3;text-shadow:0 0 22px rgba(255,120,150,.45)}
+.s2 .vcap span{background:linear-gradient(135deg,#d4af6a,#f0c9a4);color:#3a0d1c}
+.s2 .stage:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:6;background:radial-gradient(ellipse at 50% 50%,transparent 55%,rgba(60,8,24,.45))}

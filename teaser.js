@@ -22,14 +22,14 @@ var timers=[];
 function later(fn,ms){timers.push(setTimeout(fn,ms))}
 function show(h){var d=document.createElement('div');d.className='scene';d.innerHTML=h;stage.innerHTML='';stage.appendChild(d);return d}
 function bg(src,mode,dim){return '<div class="bg '+(mode||'kin')+'" style="background-image:url('+A+src+')"></div><div class="dim" style="background:'+(dim||'rgba(0,0,0,.25)')+'"></div>'}
-function fx(n){var h='<div class="fx">';for(var i=0;i<n;i++){var sz=KEY==='s1'?(2+Math.random()*5):(1.5+Math.random()*2.5);h+='<i style="left:'+(Math.random()*100)+'%;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(6+Math.random()*8)+'s;animation-delay:-'+(Math.random()*12)+'s;opacity:'+(.4+Math.random()*.6)+'"></i>'}return h+'</div>'}
+function fx(n){var h='<div class="fx">';for(var i=0;i<n;i++){var sz=KEY==='s1'?(2+Math.random()*5):(3+Math.random()*11); /* S2: soft floating bokeh */h+='<i style="left:'+(Math.random()*100)+'%;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(6+Math.random()*8)+'s;animation-delay:-'+(Math.random()*12)+'s;opacity:'+(.4+Math.random()*.6)+'"></i>'}return h+'</div>'}
 var tc0=0;
 function rec(cam){return '<div class="rec"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="r">REC</span><span class="tc" id="tc">00:00:00:00</span><span class="cam">'+(cam||'CAM 02 · INTERVIEW')+'</span></div>'}
 function tickTC(){var el=document.getElementById('tc');if(!el)return;var t=Date.now()-tc0+(KEY==='s2'?85440000:0),f=Math.floor(t/40)%25,s=Math.floor(t/1000),p=function(n){return('0'+n).slice(-2)};el.textContent=p(Math.floor(s/3600)%24)+':'+p(Math.floor(s/60)%60)+':'+p(s%60)+':'+p(f)}
 setInterval(tickTC,40);
 function type(el,txt,sp){var i=0;el.innerHTML='<span></span><i class="cur"></i>';var s=el.firstChild;(function t(){if(i<=txt.length){s.innerHTML=txt.slice(0,i).replace(/\n/g,'<br>');i++;later(t,sp)}})()}
 function setRate(r){rate.className='rate'+(r?' '+r:'');rate.textContent=r==='all'?'ALL':r==='r19'?'19':''}
-var trans=KEY==='s1'?'<div class="flash"></div>':'<div class="glitch"></div>';
+var trans=KEY==='s1'?'<div class="flash"></div>':'<div class="glow"></div>';
 
 /* scene factories */
 function sOpen(top,sub){return function(){show('<div class="big"><div class="sm" style="animation-delay:.1s">'+top+'</div><div style="animation-delay:.5s;font-size:clamp(22px,5vw,40px)">'+sub+'</div></div>')}}
@@ -75,23 +75,23 @@ s1:{rate:'all',mont:M1,end:{bg:'s1-group-2.png',dim:'rgba(244,236,223,.55)',titl
  ]},
 s2:{rate:'r19',mont:M2,end:{bg:'s2-group-1.png',dim:'rgba(11,6,8,.6)',title:'AFTER DARK',ko:'《미슬토우 : AFTER DARK》',d:'11.24 첫 방송 · 매일 밤, 심야 편성',go:'index.html#s2',other:['JINGLE TV 오리지널','미슬토우 시즌 1 티저 ›','teaser-s1.html']},
  T:[
-  [beats(4),sOpen('JINGLE TV LATE NIGHT','19세 미만 시청 불가'),'open'],
-  [beats(6),sQuestion('Q. 이 집에\n들어온 이유가 뭐예요?','CAM 04 · LATE INTERVIEW'),'q'],
-  [beats(5),sInterview('mujin','s2-mujin-night.png','예측할 수 없는 사람들. 그거면 충분하죠.','CAM 04 · LATE INTERVIEW'),'iv'],
-  [beats(5),sInterview('rahee','s2-rahee-night.png','자유롭게, 다양한 사람을 만나 보고 싶어서요.','CAM 04 · LATE INTERVIEW'),'iv'],
-  [beats(5),sInterview('yunjae','s2-yunjae-night.png','승패 없는 관계. 한 번은 해 보고 싶었어요.','CAM 04 · LATE INTERVIEW'),'iv'],
-  [beats(5),sInterview('seon','s2-seon-night.png','평소엔 못 만나는 사람들이 궁금해서?','CAM 04 · LATE INTERVIEW'),'iv'],
-  [beats(4),sBig(['~같은 설산, 다른 집','매력과 취향으로 부딪히는','!일곱 명의 밤'],'s2-group-1.png','rgba(10,3,6,.72)'),'big'],
+  [beats(4),sOpen('JINGLE TV LATE NIGHT','어른들의 크리스마스 연애'),'open'],
+  [beats(6),sQuestion('Q. 이번 크리스마스,\n어떤 밤을 기대해요?','CAM 04 · PRIVATE TALK'),'q'],
+  [beats(5),sInterview('mujin','s2-mujin-night.png','마음에 들면, 돌려 말 안 해요.','CAM 04 · PRIVATE TALK'),'iv'],
+  [beats(5),sInterview('rahee','s2-rahee-night.png','먼저 다가가는 쪽이 더 재밌잖아요.','CAM 04 · PRIVATE TALK'),'iv'],
+  [beats(5),sInterview('yunjae','s2-yunjae-night.png','끌리면 바로 말할 거예요. 오늘 밤이라도.','CAM 04 · PRIVATE TALK'),'iv'],
+  [beats(5),sInterview('seon','s2-seon-night.png','설레는 거요? 좋아하죠. 숨길 생각도 없고.','CAM 04 · PRIVATE TALK'),'iv'],
+  [beats(4),sBig(['~같은 설산, 다른 밤','어른들의 크리스마스는','!조금 더 뜨겁다'],'s2-group-1.png','rgba(10,3,6,.72)'),'big'],
   [beats(4),sPlace('place-house2-00.png','AFTER DARK HOUSE','kin'),'scene'],
   [beats(4),sPlace('place-house2-03.png','VELVET BAR'),'scene'],
-  [beats(4),sGroup('s2-group-1.png','정규 일정이 끝난 뒤부터,'),'scene'],
-  [beats(4),sGroup('s2-group-2.png','진짜가 시작된다','kout'),'scene'],
+  [beats(4),sGroup('s2-group-1.png','밤이 깊어질수록,'),'scene'],
+  [beats(4),sGroup('s2-group-2.png','마음은 더 솔직해진다','kout'),'scene'],
   [beats(4),sQuote('igeon','와, 분위기부터 돈 좀 썼네. 여기 진짜 크리스마스 맞죠?','FIRST IMPRESSION'),'quote'],
   [beats(4),sQuote('jaeheon','아까와 향이 달라졌네요. 조금 더 가벼운 쪽으로.','FIRST IMPRESSION'),'quote'],
   [beats(4),sQuote('iseo','처음 오셨으면 규칙부터 확인하는 게 편할 거예요.','FIRST IMPRESSION'),'quote'],
-  [beats(7),sGrid('그리고, 예정에 없던 마지막 변수'),'grid'],
-  [ASK,sBig(['누가 먼저','!선을 넘을까']),'ask'],
-  [ASK,sBig(['마지막 밤,','!끝까지 남는 사람은']),'ask'],
+  [beats(7),sGrid('그리고, 오늘 밤 도착할 한 사람'),'grid'],
+  [ASK,sBig(['오늘 밤,','!누구 옆에 앉을까']),'ask'],
+  [ASK,sBig(['크리스마스의 끝,','!누구의 손을 잡을까']),'ask'],
   [6000,sMontage(M2),'mont'],
   [6500,sTitle('MISTLETOE · SEASON 02','AFTER DARK','《미슬토우 : AFTER DARK》','겨울, 마음이 가장 뜨거워지는 밤.','radial-gradient(circle at 50% 42%,#3a0d1c,#0b0608 72%)'),'title']
  ]}
