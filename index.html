@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>미슬토우 · JINGLE TV</title>
+<meta name="description" content="JINGLE TV 오리지널 크리스마스 연애 리얼리티 《미슬토우》 시즌 1 MISTLETOE · 시즌 2 AFTER DARK 프로그램 소개">
+<meta property="og:title" content="《미슬토우》 · JINGLE TV ORIGINAL">
+<meta property="og:description" content="겨울, 사랑이 내리는 순간. 설산 리조트에서 보내는 크리스마스.">
+<meta property="og:image" content="assets/s1-group-1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Serif+KR:wght@600;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+/* ── SEASON THEMES ───────────────────────────── */
+:root,[data-season="s1"]{
+  --bg:#f6f1e8;--bg2:#efe7d9;--card:#fffdf8;--ink:#1e2a24;--sub:#6a6f66;--line:#e2d8c6;
+  --acc:#b3243a;--acc2:#2f5d46;--gold:#b8913d;--chip:#f1e6d6;--chipt:#7a2232;
+  --bar:#1d2b24;--bart:#f6efe2;--hero1:#2f5d46;--hero2:#7a1d2c;--shadow:0 6px 24px rgba(60,40,20,.10);
+  --out:#1d2b24;--outt:#f3ede2;--sel:#b3243a;
+  color-scheme:light;
+}
+[data-season="s2"]{
+  --bg:#0e0a0c;--bg2:#160f13;--card:#1b1317;--ink:#f3e9e3;--sub:#ad9ea2;--line:#33242b;
+  --acc:#c23a55;--acc2:#d4af6a;--gold:#d4af6a;--chip:#2a1b22;--chipt:#f0c9a4;
+  --bar:#060405;--bart:#f3e9e3;--hero1:#2a0e18;--hero2:#4a1430;--shadow:0 6px 28px rgba(0,0,0,.45);
+  --out:#060405;--outt:#efe3dc;--sel:#d4af6a;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:112px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,"Apple SD Gothic Neo",sans-serif;line-height:1.65;transition:background .5s,color .5s;overflow-x:hidden}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+
+/* ── TOP BAR ─────────────────────────────────── */
+.top{position:sticky;top:0;z-index:50;background:var(--bar);color:var(--bart);transition:background .5s;padding-top:env(safe-area-inset-top,0)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:10px;height:40px;font-size:12px;font-weight:700}
+.live{display:flex;align-items:center;gap:7px;letter-spacing:1.5px;color:#ff6b81;font-weight:900}
+.live i{width:8px;height:8px;border-radius:50%;background:#ff3355;animation:bl 1.1s infinite}
+@keyframes bl{50%{opacity:.2}}
+.logo{font-family:"Playfair Display",serif;font-weight:900;font-size:15px;letter-spacing:.5px;white-space:nowrap}
+.logo b{color:var(--sel)}
+.clk{font-variant-numeric:tabular-nums;opacity:.85;white-space:nowrap}
+.status{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.seasonbar{display:flex;gap:6px;padding:0 0 8px}
+.sbtn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.05);border-radius:10px;padding:7px 8px;cursor:pointer;font-size:12.5px;font-weight:700;color:var(--bart);opacity:.62;transition:.25s;min-width:0}
+.sbtn span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sbtn em{font-style:normal;font-size:10px;font-weight:900;border-radius:4px;padding:1px 5px;flex:none}
+.sbtn[data-s="s1"] em{background:#2f8a4f;color:#fff}
+.sbtn[data-s="s2"] em{background:#d0021b;color:#fff}
+.sbtn.on{opacity:1;background:rgba(255,255,255,.14);border-color:var(--sel)}
+.gnb{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;border-top:1px solid rgba(255,255,255,.08);background:rgba(0,0,0,.18)}
+.gnb::-webkit-scrollbar{display:none}
+.gnb a{flex:none;text-decoration:none;font-size:13px;font-weight:700;padding:9px 12px;opacity:.78}
+.gnb a:hover{opacity:1;color:var(--sel)}
+
+/* ── HERO ────────────────────────────────────── */
+.hero{position:relative;margin-top:14px;border-radius:22px;overflow:hidden;min-height:520px;background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;box-shadow:var(--shadow);touch-action:pan-y}
+.hero .slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 22%;opacity:0;transition:opacity 1.2s ease}
+.hero .slide.on{opacity:1}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05) 25%,rgba(0,0,0,.25) 50%,rgba(8,4,6,.92));pointer-events:none}
+.snow{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.snow i{position:absolute;top:-10px;width:6px;height:6px;border-radius:50%;background:#fff;opacity:.8;animation:fall linear infinite}
+[data-season="s2"] .snow i{background:#f2c46b;width:3px;height:3px;opacity:.7;box-shadow:0 0 6px #f2c46b}
+@keyframes fall{to{transform:translate3d(30px,560px,0)}}
+.hin{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:24px 22px 22px}
+.eyebrow{font-size:11px;font-weight:900;letter-spacing:2px;color:#ffd9a8;text-transform:uppercase}
+.htitle{margin:6px 0 2px;font-family:"Playfair Display",serif;font-size:clamp(40px,8vw,72px);line-height:1;font-weight:900;letter-spacing:-.5px}
+.htitle small{display:block;font-size:.34em;letter-spacing:4px;font-style:italic;color:#ffd9a8;margin-top:8px}
+.hko{font-family:"Noto Serif KR",serif;font-weight:900;font-size:20px;margin-top:6px}
+.hhook{font-size:15px;opacity:.92;margin:6px 0 12px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.badges span{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:20px;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2)}
+.badges .rate{background:#2f8a4f;border:0}
+[data-season="s2"] .badges .rate{background:#d0021b}
+.cap{display:inline-block;background:rgba(0,0,0,.66);border-radius:8px;padding:7px 12px;font-size:14px;font-weight:700;min-height:36px;transition:opacity .3s}
+.harrow{position:absolute;top:30%;z-index:3;width:40px;height:40px;border-radius:50%;border:0;background:rgba(0,0,0,.38);color:#fff;font-size:18px;cursor:pointer;backdrop-filter:blur(4px)}
+.harrow.l{left:10px}.harrow.r{right:10px}
+.hdots{position:absolute;top:14px;right:16px;z-index:3;display:flex;gap:6px}
+.hdots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45)}
+.hdots i.on{background:#fff;width:20px;border-radius:5px}
+.htag{position:absolute;top:14px;left:16px;z-index:3;font-size:11px;font-weight:900;letter-spacing:1.5px;background:var(--acc);padding:4px 9px;border-radius:6px}
+
+.ticker{margin:12px 0 0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 13px;font-size:13px;display:flex;gap:10px;align-items:center;overflow:hidden}
+.ticker b{flex:none;background:var(--acc);color:#fff;border-radius:6px;padding:2px 8px;font-size:11px}
+.ticker span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--sub);transition:opacity .3s}
+
+/* ── SECTIONS ────────────────────────────────── */
+section{padding-top:8px}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:40px 0 4px;border-bottom:2px solid var(--ink);padding-bottom:8px}
+.sh h2{margin:0;font-size:21px;font-weight:900;letter-spacing:-.3px}
+.sh h2 small{display:block;font-family:"Playfair Display",serif;font-size:11px;letter-spacing:2.5px;color:var(--acc);font-weight:900;text-transform:uppercase}
+.sh .hint{font-size:12px;color:var(--sub);text-align:right}
+.lead{font-size:15px;margin:14px 0}
+.fade{animation:fd .45s ease}
+@keyframes fd{from{opacity:0;transform:translateY(8px)}}
+
+.intro{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-top:16px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.slogan{font-family:"Playfair Display",serif;font-style:italic;font-size:19px;color:var(--acc);margin:0 0 4px;line-height:1.35}
+.slogan+p{margin:0 0 12px;color:var(--sub);font-size:13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:24px;font-weight:900;color:var(--acc);line-height:1.2}
+.stat span{font-size:12.5px;color:var(--sub)}
+.kw{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.tg{display:inline-block;padding:3px 9px;border-radius:20px;background:var(--chip);color:var(--chipt);font-size:11.5px;font-weight:700}
+
+.routes{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.route{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);overflow:hidden}
+.route .no{font-family:"Playfair Display",serif;font-size:11px;letter-spacing:2px;font-weight:900;color:var(--acc)}
+.route h3{margin:2px 0 2px;font-family:"Noto Serif KR",serif;font-size:19px}
+.route .when{font-size:12.5px;font-weight:700;color:var(--acc2)}
+.route p{font-size:13.5px;color:var(--sub);margin:8px 0}
+.scene{background:var(--bg2);border-radius:10px;padding:11px 12px;font-size:13px;margin-top:8px}
+.scene q{display:block;quotes:none;margin:2px 0}
+.scene q b{color:var(--acc)}
+
+/* cast */
+.cast{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.cc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;text-align:left;padding:0}
+.cc:hover{transform:translateY(-4px)}
+.cc .im{aspect-ratio:3/4;overflow:hidden;background:var(--bg2);position:relative}
+.cc img{width:100%;height:100%;object-fit:cover;object-position:center 18%;transition:transform .6s}
+.cc:hover img{transform:scale(1.05)}
+.cc .im:after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.72))}
+.cc .quote{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;color:#fff;font-size:13px;font-weight:500;line-height:1.45;text-shadow:0 1px 4px rgba(0,0,0,.6)}
+.cc .badge{position:absolute;top:10px;left:10px;z-index:2;font-size:10.5px;font-weight:900;letter-spacing:1px;background:var(--acc);color:#fff;padding:3px 8px;border-radius:6px}
+.cc .tx{padding:12px 14px 14px}
+.nm{font-size:19px;font-weight:900;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.nm small{font-size:12.5px;color:var(--sub);font-weight:500}
+.rl{font-size:13px;color:var(--sub);margin:1px 0 8px}
+.sw{display:flex;gap:10px;margin-top:9px;font-size:11px;color:var(--sub);flex-wrap:wrap}
+.sw span{display:flex;align-items:center;gap:5px}
+.sw i{width:13px;height:13px;border-radius:50%;border:1px solid rgba(0,0,0,.15);display:inline-block}
+.more{font-size:11.5px;font-weight:700;color:var(--acc);margin-top:8px}
+
+/* stills rail */
+.rail{display:flex;gap:12px;overflow-x:auto;padding:16px 2px 14px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{height:6px}.rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+.still{flex:0 0 240px;scroll-snap-align:start;background:#1b1a22;border-radius:16px;padding:7px;cursor:pointer;border:0;text-align:left}
+.still .im{aspect-ratio:3/4;border-radius:11px;overflow:hidden}
+.still img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.still .lb{display:flex;justify-content:space-between;gap:6px;padding:8px 5px 3px;color:#fff;font-size:12px;font-weight:700}
+.still .lb i{font-style:normal;color:#ff8a9e;font-size:10px;white-space:nowrap}
+
+/* schedule */
+.days{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin-top:16px}
+.day{border:1px solid var(--line);background:var(--card);border-radius:12px;padding:8px 4px;cursor:pointer;text-align:center;transition:.2s}
+.day b{display:block;font-size:11px;letter-spacing:1px;color:var(--sub)}
+.day span{display:block;font-size:15px;font-weight:900}
+.day.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.day.on b{color:rgba(255,255,255,.8)}
+.dayview{margin-top:12px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.dayview h3{margin:0;font-family:"Playfair Display",serif;font-size:26px;line-height:1.15}
+.dayview h3 small{display:block;font-family:"Noto Sans KR",sans-serif;font-size:12px;color:var(--sub);font-weight:700;letter-spacing:1px}
+.dayview .ko{font-size:14px;color:var(--sub);margin:2px 0 12px}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--line);margin-left:6px}
+.tl li{position:relative;padding:6px 0 6px 18px;font-size:14px}
+.tl li:before{content:"";position:absolute;left:-7px;top:13px;width:12px;height:12px;border-radius:50%;background:var(--card);border:2px solid var(--acc)}
+.tl li.hi:before{background:var(--acc)}
+.tl time{font-weight:900;font-variant-numeric:tabular-nums;margin-right:8px;color:var(--acc)}
+.note{font-size:12px;color:var(--sub);margin:10px 0 0}
+
+/* signature */
+.sig{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-top:16px}
+.sg{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.sg .ic{font-size:24px}
+.sg h4{margin:4px 0 2px;font-family:"Playfair Display",serif;font-size:17px;letter-spacing:.3px}
+.sg .k{font-size:12px;color:var(--acc);font-weight:700}
+.sg p{font-size:13px;color:var(--sub);margin:6px 0 0}
+
+/* privileges / cards */
+.tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-top:16px}
+.ticket{border-radius:16px;padding:16px;color:#fff;position:relative;overflow:hidden;min-height:150px;box-shadow:var(--shadow)}
+.ticket:after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:rgba(255,255,255,.12)}
+.ticket .gr{font-family:"Playfair Display",serif;font-size:30px;font-weight:900;line-height:1}
+.ticket .nmx{font-size:12px;font-weight:900;letter-spacing:1.5px;margin-top:4px;opacity:.9}
+.ticket p{font-size:12.5px;margin:10px 0 0;opacity:.92}
+.ticket .lim{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;background:rgba(0,0,0,.25);border-radius:6px;padding:2px 7px}
+.rules{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px}
+.rule b{font-size:11px;letter-spacing:1px;color:var(--acc)}
+.rule h5{margin:2px 0;font-size:15px}
+.rule p{margin:0;font-size:12.5px;color:var(--sub)}
+
+/* house */
+.house{display:grid;grid-template-columns:1.1fr 1fr;gap:14px;margin-top:16px}
+.floor{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.floor h4{margin:0 0 8px;font-size:13px;letter-spacing:1.5px;color:var(--acc)}
+.rooms{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.room{border-radius:12px;padding:12px;color:#fff;font-weight:900;font-family:"Playfair Display",serif;font-size:18px;position:relative;min-height:70px}
+.room small{display:block;font-family:"Noto Sans KR",sans-serif;font-size:11px;font-weight:500;opacity:.85}
+.fl{list-style:none;padding:0;margin:0}
+.fl li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13.5px}
+.fl li:last-child{border:0}
+.fl li span:last-child{color:var(--sub);font-size:12px;white-space:nowrap}
+.grid-ph{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.ph{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:3/2;cursor:pointer;border:0;padding:0;background:var(--bg2)}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.ph:hover img{transform:scale(1.06)}
+.ph span{position:absolute;left:0;right:0;bottom:0;padding:18px 8px 6px;font-size:11.5px;font-weight:700;color:#fff;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75));text-align:left}
+.ph.wide{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+
+/* crew */
+.crew{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
+.cr{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;text-align:left;box-shadow:var(--shadow)}
+.cr .im{aspect-ratio:1/1;overflow:hidden}
+.cr img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.cr .tx{padding:10px 12px 12px}
+.cr .ro{font-size:10.5px;font-weight:900;letter-spacing:1px;color:var(--acc)}
+.cr .n{font-size:15.5px;font-weight:900}
+.cr p{margin:3px 0 0;font-size:12px;color:var(--sub);line-height:1.5}
+
+/* command demo */
+.cmd{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-top:16px;box-shadow:var(--shadow)}
+.btns{display:flex;flex-wrap:wrap;gap:6px}
+.btns button{border:0;border-radius:20px;padding:6px 12px;background:var(--chip);color:var(--chipt);font-size:12.5px;font-weight:700;cursor:pointer}
+.btns button.on{background:var(--acc);color:#fff}
+.btns button i{font-style:normal;font-size:10px;opacity:.75;margin-left:4px}
+.desc{font-size:12.5px;color:var(--sub);margin:10px 0 0}
+.out{margin-top:10px;background:var(--out);color:var(--outt);border-radius:12px;padding:14px;font-size:13px;white-space:pre-wrap;font-family:"Noto Sans KR",ui-monospace,monospace;line-height:1.7;min-height:120px;max-height:380px;overflow:auto}
+.out em{display:block;color:#ff8a9e;font-style:normal;font-size:11px;margin-bottom:6px;letter-spacing:1px}
+
+/* live log */
+.lg div{display:flex;gap:9px;font-size:13px;padding:8px 0;border-bottom:1px dashed var(--line);animation:fd .5s}
+.lg div:last-child{border:0}
+.lg time{flex:none;color:var(--sub);font-variant-numeric:tabular-nums}
+.lg b{flex:none;font-size:10.5px;border-radius:6px;padding:0 7px;height:20px;line-height:20px;background:var(--chip);color:var(--chipt)}
+.lg b.f{background:var(--acc);color:#fff}
+
+/* guide */
+.guide{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.guide ul{margin:6px 0 0;padding-left:18px;font-size:13.5px}
+.guide li{margin:4px 0}
+.guide h4{margin:0;font-size:15px}
+
+.ft{text-align:center;font-size:11.5px;color:var(--sub);margin:50px 0 30px;line-height:1.8}
+.ft b{font-family:"Playfair Display",serif;font-size:15px;color:var(--ink)}
+
+/* ── MODAL / LIGHTBOX ───────────────────────── */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;overflow-y:auto;padding:30px 12px;backdrop-filter:blur(4px)}
+.modal.on{display:flex}
+.mbox{position:relative;width:100%;max-width:880px;background:var(--card);color:var(--ink);border-radius:20px;overflow:hidden;animation:fd .35s}
+.mx{position:absolute;top:10px;right:10px;z-index:3;width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.5);color:#fff;font-size:18px;cursor:pointer}
+.mtop{display:grid;grid-template-columns:340px 1fr;align-items:stretch}.mtop .im{position:relative;min-height:460px;background:var(--bg2);overflow:hidden}.mtop .im img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%}.mtop .im:after{content:"";position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.55));pointer-events:none}.mtag{position:absolute;top:12px;left:12px;z-index:2;font-size:10.5px;font-weight:900;letter-spacing:1.5px;color:#fff;background:var(--acc);border-radius:6px;padding:3px 9px}.mstripe{position:absolute;left:0;right:0;bottom:0;height:6px;display:flex;z-index:2}.mstripe i{flex:1}.mtx{padding:22px 22px 24px;background:radial-gradient(circle at 100% 0,color-mix(in srgb,var(--acc) 16%,transparent),transparent 55%)}
+.mtx .nm{font-size:26px}
+.prof{display:grid;grid-template-columns:72px 1fr;gap:4px 10px;font-size:13px;margin:12px 0 0}
+.prof dt{color:var(--sub);font-weight:700}
+.prof dd{margin:0}
+.mgal{padding:4px 20px 22px}
+.mgal h5{margin:8px 0 8px;font-size:12px;letter-spacing:1.5px;color:var(--acc)}
+.mgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.mgrid button{border:0;padding:0;border-radius:10px;overflow:hidden;aspect-ratio:3/4;cursor:pointer;position:relative;background:var(--bg2)}
+.mgrid img{width:100%;height:100%;object-fit:cover;object-position:center 20%}
+.mgrid span{position:absolute;left:0;right:0;bottom:0;font-size:10.5px;color:#fff;padding:12px 5px 4px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.8));font-weight:700}
+.viewer{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.94);display:none;align-items:center;justify-content:center;flex-direction:column;padding:16px}
+.viewer.on{display:flex}
+.viewer img{max-width:100%;max-height:82vh;border-radius:10px;object-fit:contain}
+.viewer .lbc{color:#fff;font-size:13px;margin-top:10px;font-weight:700;text-align:center}
+.viewer button{position:absolute;border:0;background:rgba(255,255,255,.12);color:#fff;width:44px;height:44px;border-radius:50%;font-size:20px;cursor:pointer}
+.viewer .p{left:12px;top:50%}.viewer .n{right:12px;top:50%}.viewer .x{right:12px;top:12px}
+
+.gate{position:fixed;inset:0;z-index:140;background:rgba(6,3,5,.9);display:none;align-items:center;justify-content:center;padding:16px}
+.gate.on{display:flex}
+.gbox{max-width:380px;width:100%;background:#160f13;color:#f3e9e3;border:1px solid #3a2730;border-radius:18px;padding:24px;text-align:center}
+.g19{width:64px;height:64px;border-radius:50%;border:4px solid #d0021b;color:#d0021b;font-weight:900;font-size:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.gbox p{font-size:13.5px;color:#c9b8bd;margin:8px 0 16px}
+.gbox button{border:0;border-radius:10px;padding:10px 16px;font-weight:900;cursor:pointer;margin:3px}
+.gbox .ok{background:#c23a55;color:#fff}.gbox .no{background:#2a1b22;color:#f0c9a4}
+
+@media (max-width:860px){
+  .intro,.routes,.house,.guide{grid-template-columns:1fr}
+  .cast{grid-template-columns:repeat(2,1fr)}
+  .crew{grid-template-columns:repeat(3,1fr)}
+  .days{grid-template-columns:repeat(4,1fr)}
+  .rules{grid-template-columns:1fr}
+  .grid-ph{grid-template-columns:repeat(2,1fr)}
+  .mtop{grid-template-columns:1fr}
+  .mtop .im{min-height:0;height:min(70vh,540px)}
+  .mgrid{grid-template-columns:repeat(3,1fr)}
+}
+@media (max-width:520px){
+  .hero{min-height:560px}
+  .hero:before{content:"← 밀어서 시즌 전환 →";position:absolute;top:44px;left:0;right:0;z-index:3;text-align:center;font-size:10.5px;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.75)}
+  .hin{padding:18px 16px}
+  .harrow{display:none}
+  .cast{gap:10px}
+  .cc .quote{display:none}
+  .nm{font-size:17px}
+  .crew{grid-template-columns:repeat(2,1fr)}
+  .still{flex-basis:200px}
+  .status{display:none}
+  .sh .hint{display:none}
+  .stat b{font-size:20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body data-season="s1">
+
+<header class="top">
+  <div class="wrap">
+    <div class="bar">
+      <span class="live"><i></i>ON AIR</span>
+      <span class="logo">JINGLE<b>·</b>TV</span>
+      <span class="status" id="airStatus">—</span>
+      <span class="clk" id="clk">--:--:--</span>
+    </div>
+    <div class="seasonbar" role="tablist" aria-label="시즌 선택">
+      <button class="sbtn" data-s="s1" role="tab"><em>ALL</em><span>SEASON 1 · MISTLETOE</span></button>
+      <button class="sbtn" data-s="s2" role="tab"><em>19</em><span>SEASON 2 · AFTER DARK</span></button>
+    </div>
+  </div>
+  <nav class="gnb wrap" aria-label="섹션 이동">
+    <a href="#about">프로그램 소개</a><a href="#cast">출연진</a><a href="#house">숙소</a><a href="#crew">제작진</a>
+  </nav>
+</header>
+
+<main class="wrap" id="main">
+  <div class="hero" id="hero">
+    <div class="snow" id="snow"></div>
+    <span class="htag" id="htag">JINGLE TV ORIGINAL</span>
+    <div class="hdots" id="hdots"></div>
+    <button class="harrow l" id="prevS" aria-label="이전 시즌">‹</button>
+    <button class="harrow r" id="nextS" aria-label="다음 시즌">›</button>
+    <div class="hin">
+      <div class="eyebrow" id="heyebrow"></div>
+      <div class="htitle" id="htitle"></div>
+      <div class="hko" id="hko"></div>
+      <div class="hhook" id="hhook"></div>
+      <div class="badges" id="hbadges"></div>
+      <div class="cap" id="cap"></div>
+    </div>
+  </div>
+  <div class="ticker"><b>실시간 반응</b><span id="tk"></span></div>
+
+  <div id="content"></div>
+
+  <footer class="ft" id="footer"></footer>
+</main>
+
+<div class="modal" id="modal" aria-modal="true" role="dialog"><div class="mbox" id="mbox"></div></div>
+<div class="viewer" id="lb" role="dialog" aria-modal="true">
+  <button class="x" id="lbx" aria-label="닫기">✕</button>
+  <button class="p" id="lbp" aria-label="이전">‹</button>
+  <img id="lbi" alt="">
+  <div class="lbc" id="lbc"></div>
+  <button class="n" id="lbn" aria-label="다음">›</button>
+</div>
+<div class="gate" id="gate">
+  <div class="gbox">
+    <div class="g19">19</div>
+    <b>MISTLETOE : AFTER DARK</b>
+    <p>시즌 2는 성인 대상 프로그램입니다.<br>음주·흡연 장면과 성인 시청자 반응이 포함되어 있습니다.<br>만 19세 이상이신가요?</p>
+    <button class="ok" id="gateOk">19세 이상, 입장하기</button>
+    <button class="no" id="gateNo">시즌 1로 돌아가기</button>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+var A='assets/';
+
+/* ── CREW (common) ───────────────────────── */
+var CREW=[
+ {id:'jingle',ro:'MAIN HOST',n:'미스터 징글'},
+ {id:'santa',ro:'EXECUTIVE PRODUCER',n:'산타 PD'},
+ {id:'rudolph',ro:'FIELD DIRECTOR',n:'루돌프 AD'},
+ {id:'elf',ro:'PRODUCTION STAFF',n:'엘프 스태프'},
+ {id:'grinch',ro:'PRODUCER',n:'그린치 PD'}
+];
+
+/* ── SEASONS ─────────────────────────────── */
+var D={
+s1:{
+ key:'s1',rating:'전체 이용가',ratingShort:'ALL',
+ eyebrow:'JINGLE TV ORIGINAL · CHRISTMAS DATING REALITY',
+ title:'MISTLETOE<small>SEASON 01</small>',ko:'《미슬토우》',hook:'겨울, 사랑이 내리는 순간.',
+ heroes:['s1-group-1.png','s1-group-2.png'],
+ badges:['11.24 — 12.25','설산 MISTLETOE RESORT','성인 남녀 8인'],
+ caps:['“첫눈이 내리던 날, 낯선 사람들이 같은 집에 도착했다.”','[자막] 벽난로 앞, 아직 아무도 모르는 마음','크리스마스, 당신은 누구를 선택할까?','[자막] 눈이 그치기 전에 전하고 싶은 말'],
+ ticks:['문다인 웃는 거 봐 ㅠㅠㅠ','채서아 컵 내려놓는 타이밍 뭐야ㅋㅋㅋ','아니 내 커플 주식 어쩌라고요','주연우 오늘 진짜 용기 냈다','데이트 한번인데 너무 앞서가지 말자','다음 장면 제발 끊지 마','남시온 말없이 차 내려주는 거 봤어?','한결 피아노 치는 장면 언제 나와요'],
+ about:'눈 덮인 설산의 MISTLETOE RESORT. 서로 모르는 성인 남녀가 WINTER HOUSE에 모여 크리스마스까지 한 지붕 아래에서 겨울을 보냅니다. 함께 밥을 짓고, 설원을 걷고, 벽난로 앞에서 이야기를 나눕니다. 정해진 커플도, 보장된 결말도 없습니다. 크리스마스에 마지막으로 웃는 사람은 누구일까요?',
+ kw:['겨울 로맨스','설렘','우정','크리스마스'],
+ stats:[['11.24','첫 입주 · FIRST SNOW'],['8인','성인 남녀 참가자'],['12.25','OUR FIRST CHRISTMAS'],['ALL','전체 이용가']],
+ cast:[
+  {id:'sion',n:'남시온',a:28,g:'남',job:'건축설계사',h:'185cm',b:'02.07',smoke:'비흡연',scent:'편백 · 화이트 머스크',hair:'뮤트 세이지 그린',eye:'미스트 제이드',
+   tags:['#차분한다정','#말보다행동','#캐러멜푸딩'],q:'“밖에 많이 춥죠. 따뜻한 차도 있는데, 드실래요?”',
+   per:'차분·섬세·성실·생활력·은근한 고집. 작은 습관과 취향을 기억하고, 말보다 행동으로 보여준다.',mot:'일과 집만 반복하던 생활에서 벗어나 일상을 공유하는 연애를 기대.',life:'아침형 · 커피 · 요리 · 독서 · 건축 사진 · 정리'},
+  {id:'yeonwoo',n:'주연우',a:25,g:'남',job:'광고 카피라이터',h:'181cm',b:'06.12',smoke:'비흡연',scent:'유자 · 네롤리',hair:'뮤트 애프리콧 오렌지',eye:'스모키 바이올렛',
+   tags:['#능글유쾌','#분위기메이커','#말장난장인'],q:'“여기 자리 있어요. 컵은 누가 이렇게 예쁘게 골라 놨어요?”',
+   per:'능글·유쾌·사교적·재치·승부욕. 대화를 주도하고 민망함은 농담으로 넘기지만, 진지한 감정 앞에선 서툴다.',mot:'재미있는 크리스마스와 예상 밖의 설렘.',life:'야행성 · 보드게임 · 즉흥 여행 · 크리스마스 음악 · 디저트'},
+  {id:'taegyeom',n:'유태겸',a:29,g:'남',job:'다큐멘터리 촬영감독',h:'189cm',b:'11.18',smoke:'비흡연',scent:'시더우드 · 베르가못',hair:'슬레이트 블루',eye:'올드 골드',
+   tags:['#무심한듯세심','#필름카메라','#명확한제안'],q:'“돌려 말하는 건 잘 못해요. 같이 걸을래요?”',
+   per:'독립적·관찰형·현실적. 허세와 과장된 친절을 싫어하고 필요한 말은 직접 한다.',mot:'타인의 이야기를 기록하던 일에서 벗어나 자신의 경험을 만들기.',life:'새벽 산책 · 필름 사진 · 등산 · 커피 · 설경 촬영'},
+  {id:'hangyeol',n:'한결',a:23,g:'남',job:'피아노 연주자 · 프리랜서 반주자',h:'183cm',b:'02.23',smoke:'비흡연',scent:'바이올렛 리프 · 앰브레트',hair:'딥 내추럴 블랙',eye:'로즈 브라운',
+   tags:['#차분한절제','#피아노','#건조한농담'],q:'“커피 드세요? 지금 내리려던 참이라.”',
+   per:'차분·절제·독립적·은근한 장난기. 말보다 관찰하고, 친해지면 건조한 농담을 던진다. 감정 표현이 조금 늦다.',mot:'정해진 악보 밖의 인연을 만나고 싶어서.',life:'피아노 · 독서 · 커피 · 산책'},
+  {id:'seoa',n:'채서아',a:26,g:'여',job:'플로리스트 · 꽃 작업실 운영',h:'164cm',b:'04.16',smoke:'비흡연',scent:'프리지아 · 화이트 티',hair:'뮤트 블러시 핑크',eye:'프로스트 블루',
+   tags:['#온화한섬세함','#손편지','#부드럽지만단호'],q:'“제가 아까 색깔만 맞춰 봤어요. 마음에 드는 걸로 쓰세요.”',
+   per:'온화·섬세·감수성·자기 기준. 친절하지만 무조건 양보하지 않고, 갈등은 생각을 정리한 뒤 대화로 푼다.',mot:'남의 기념일을 위한 꽃을 만들다, 처음으로 자신을 위한 크리스마스를 기대.',life:'꽃 장식 · 리본 공예 · 차 · 손편지 · 딸기 케이크 · 밀크티'},
+  {id:'dain',n:'문다인',a:24,g:'여',job:'피겨스케이팅 코치',h:'168cm',b:'01.26',smoke:'비흡연',scent:'그린애플 · 민트',hair:'스모키 펄 실버',eye:'딥 오베르진',
+   tags:['#직진승부사','#빙판위코치','#솔직반말'],q:'“그건 사람마다 생각이 좀 다를걸? 아무튼 반가워요.”',
+   per:'직진·솔직·활동적·낙천적·승부욕. 호불호가 분명하고 먼저 말을 건다. 감정이 얼굴에 그대로 드러난다.',mot:'운동과 일 밖의 새로운 자극, 솔직하게 다가오는 사람.',life:'스케이트 · 게임 · 야외 활동 · 매운 음식 · 탄산음료'},
+  {id:'haerin',n:'신해린',a:28,g:'여',job:'패션 매거진 에디터',h:'172cm',b:'09.23',smoke:'비흡연',scent:'무화과 · 아이리스',hair:'뮤트 플랙스 베이지',eye:'딥 파인 그린',
+   tags:['#도회적분석가','#건조한유머','#재즈와향수'],q:'“첫인상으로 판단하진 않아요. 기억은 해 두지만요.”',
+   per:'도회적·분석적·독립적. 취향과 기준이 분명하고 누군가의 관심을 위해 자신을 바꾸지 않는다. 친해지면 장난이 많다.',mot:'직업적 평가 없이 자신을 알아가 줄 사람을 기대.',life:'재즈 · 전시 · 향수 · 독서 · 얼그레이 · 다크초콜릿'}
+ ],
+ houseName:'WINTER HOUSE',houseKo:'윈터 하우스',
+ houseLead:'통나무 벽과 벽난로, 창밖 가득한 설경. 참가자들이 크리스마스까지 함께 지낼 겨울 별장입니다.',
+ housePre:'place-house-',housePh:[[1,'숙소 외관'],[2,'FIREPLACE LOUNGE'],[3,'WINTER KITCHEN'],[4,'READING NOOK'],[5,'MAIL ROOM'],[6,'SNOW TERRACE'],[7,'SNOW 객실'],[9,'HOLLY 객실'],[10,'IVY 객실'],[8,'NOEL 객실'],[11,'현관 · 계단 · 복도'],[12,'객실 전용 욕실']]
+},
+s2:{
+ key:'s2',rating:'19세 이상',ratingShort:'19',
+ eyebrow:'JINGLE TV ORIGINAL · LATE NIGHT DATING REALITY',
+ title:'AFTER DARK<small>MISTLETOE · SEASON 02</small>',ko:'《미슬토우 : AFTER DARK》',hook:'겨울, 마음이 가장 뜨거워지는 밤.',
+ heroes:['s2-group-1.png','s2-group-2.png'],
+ badges:['11.24 — 12.25','AFTER DARK HOUSE','성인 남녀 8인'],
+ caps:['“같은 리조트, 다른 밤.”','[자막] 정규 일정이 끝난 뒤부터가 진짜','AFTER DARK — 오늘 밤의 주인공은?','[자막] 크리스마스까지, 마음은 아직 비공개'],
+ ticks:['와 저걸 바로 수락하네ㅋㅋㅋㅋ','서라희 표정 순식간에 굳는 거 봐','내 커플 오늘 장례 치릅니다','백이건 말 돌리지 않는 거 좋다','그냥 데이트 신청임 아직 모른다','여기서 광고 넣으면 진짜 화낸다','도윤재 직구 미쳤다','차무진 결론부터 말하는 거 미쳤다'],
+ about:'같은 설산 리조트, 다른 밤. AFTER DARK HOUSE에 입주한 성인 남녀가 크리스마스까지 매력과 취향으로 부딪힙니다. 벨벳 조명 아래의 라운지, 늦은 밤의 대화, 예상하지 못한 선택. 로맨스는 선택이고, 밤은 깁니다.',
+ kw:['매력','취향','경쟁','심야 로맨스'],
+ stats:[['11.24','첫 입주 · FIRST IMPRESSION'],['8인','성인 남녀 참가자'],['12.25','CHRISTMAS'],['19','성인 시청자 전용']],
+ cast:[
+  {id:'mujin',n:'차무진',a:31,g:'남',job:'프라이빗 라운지 브랜드 대표',h:'191cm',b:'12.08',smoke:'흡연',scent:'레더 · 베티버 · 앰버',hair:'블랙 체리',eye:'플래티넘 그레이',
+   tags:['#결론부터','#협상가','#위스키와재즈'],q:'“결론부터 말하죠. 오늘 밤, 시간 있어요?”',
+   per:'자신감·결단력·직접적·승부욕. 기회를 놓치지 않고 변명하지 않는다. 감정적 약점을 보이는 데는 서툴다.',mot:'예측하기 어려운 사람들과의 경쟁과 교류.',life:'웨이트 · 위스키 · 재즈 · 시가 문화 · 늦게 잠'},
+  {id:'igeon',n:'백이건',a:27,g:'남',job:'DJ · 음악 프로듀서',h:'184cm',b:'07.30',smoke:'흡연',scent:'라임 · 진저 · 스모키 머스크',hair:'더스티 로즈 코퍼',eye:'뮤트 올리브',
+   tags:['#즉흥능글','#판을즐기는','#심야산책'],q:'“와, 분위기부터 돈 좀 썼네. 여기 진짜 크리스마스 맞죠?”',
+   per:'능글·즉흥·낙천·자유분방. 예상 밖의 반응을 즐기고 경쟁 중에도 농담을 던진다. 진심과 농담의 경계가 모호하다.',mot:'크리스마스의 새로운 경험.',life:'음악 · 클럽 문화 · 당구 · 심야 산책 · 늦은 기상'},
+  {id:'jaeheon',n:'류재헌',a:29,g:'남',job:'프래그런스 브랜드 크리에이티브 디렉터',h:'187cm',b:'10.17',smoke:'비흡연',scent:'블랙티 · 샌들우드 · 스파이스',hair:'딥 인디고 바이올렛',eye:'가넷 로즈',
+   tags:['#절제된관찰자','#향에민감','#계산된제안'],q:'“아까와 향이 달라졌네요. 조금 더 가벼운 쪽으로.”',
+   per:'침착·관찰·감각·계산적. 취향과 패턴을 읽고 행동하지만 속내는 잘 설명하지 않는다.',mot:'통제된 일상에서 벗어나 새로운 취향 경험.',life:'향수 · 와인 · 전시 · 심야 음악 · 차'},
+  {id:'yunjae',n:'도윤재',a:28,g:'남',job:'전직 펜싱 선수 · 펜싱 코치',h:'188cm',b:'08.09',smoke:'비흡연',scent:'주니퍼 · 화이트 스웨이드',hair:'더스티 펀',eye:'펄 오팔',
+   tags:['#직구','#결과로증명','#야간산책'],q:'“돌려 말 안 할게요. 같이 걸어요, 지금.”',
+   per:'승부욕·직설·침착·자기 기준. 사람을 이기려 하기보다 결과로 증명한다. 감정 설명엔 서툴지만 실수는 인정한다.',mot:'승패 없는 관계를 경험해 보고 싶어서.',life:'운동 · 요리 · 탄산수 · 야간 산책'},
+  {id:'rahee',n:'서라희',a:28,g:'여',job:'광고 · 뷰티 모델',h:'170cm',b:'08.19',smoke:'흡연',scent:'블랙커런트 · 다마스크 로즈',hair:'뮤트 가넷 크림슨',eye:'페일 휘트 헤이즐',
+   tags:['#대담한직진','#먼저제안','#밤라운지'],q:'“그럼 먼저 인사하는 건 자유죠? 어디 앉으실래요?”',
+   per:'자신감·솔직·사교·대담. 주목을 즐기지만 관심을 구걸하지 않는다. 기회는 직접 만든다.',mot:'자유로운 환경에서 다양한 사람을 만나기.',life:'필라테스 · 패션 · 향수 · 사진 · 밤 라운지'},
+  {id:'seon',n:'진세온',a:25,g:'여',job:'타투이스트 · 일러스트레이터',h:'162cm',b:'05.29',smoke:'흡연',scent:'블랙베리 · 바닐라 · 머스크',hair:'라일락 펄',eye:'뮤트 코랄',
+   tags:['#예측불가','#별자리타투','#심야창작'],q:'“그럼 뭐 하러 데려왔겠어. 일단 설명부터 들어 봐.”',
+   per:'짓궂음·자유분방·독특한 감각·순발력. 예상 밖의 대답으로 긴장을 푼다. 쉽게 싫증 낸다.',mot:'평소 만나지 못한 유형과의 교류.',life:'드로잉 · 게임 · 다트 · 인디 음악 · 심야 창작'},
+  {id:'iseo',n:'한이서',a:30,g:'여',job:'아트 갤러리 디렉터',h:'173cm',b:'03.14',smoke:'비흡연',scent:'블랙 아이리스 · 파촐리',hair:'딥 피콕 그린',eye:'그래파이트 그레이',
+   tags:['#절제된우아함','#명확한기준','#솔직함에약함'],q:'“처음 오셨으면 규칙부터 확인하는 게 편할 거예요.”',
+   per:'침착·절제·독립·분석. 불필요한 신경전은 피하고 관심 있는 일엔 과감히 투자한다. 예상 밖의 솔직함에 약하다.',mot:'예측 불가능한 환경에서 자신의 취향이 어떻게 변하는지 경험.',life:'현대미술 · 클래식 · 와인 · 수영 · 혼자 보내는 아침'}
+ ],
+ houseName:'AFTER DARK HOUSE',houseKo:'애프터 다크 하우스',
+ houseLead:'짙은 월넛 벽에 번지는 금빛 조명, 버건디 벨벳과 검은 대리석. 밤이 깊을수록 빛나는 집입니다.',
+ housePre:'place-house2-',housePh:[[0,'숙소 외관'],[1,'MIDNIGHT LOUNGE'],[2,'DARK KITCHEN'],[3,'VELVET BAR'],[4,'GAME ROOM'],[5,'NIGHT TERRACE'],[6,'RUBY 객실'],[7,'ONYX 객실'],[8,'PLUM 객실'],[9,'AMBER 객실'],[10,'OPAL 객실'],[11,'현관 · 계단 · 복도'],[12,'객실 전용 욕실']]
+}
+};
+
+var RESORT=[[7,'TREE PLAZA'],[9,'CHRISTMAS HALL'],[8,'MISTLETOE GARDEN'],[5,'WINTER VILLAGE'],[6,'WINTER VILLAGE'],[10,'NOEL CAFE'],[4,'SKATING RINK'],[3,'SNOW LAKE'],[2,'SNOW TRAIL'],[1,'ENTRY GATE']];
+
+/* ── HELPERS ─────────────────────────────── */
+function $(id){return document.getElementById(id)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function img(src,alt,lazy){return '<img src="'+A+src+'" alt="'+esc(alt)+'"'+(lazy===false?'':' loading="lazy"')+' decoding="async" onerror="this.style.visibility=\'hidden\'">'}
+function faceOf(c,s){return s+'-'+c.id+'-01.png'}
+function stillOf(s,id,n){return s+'-'+id+'-'+(n<10?'0':'')+n+'.png'}
+function store(k,v){try{if(v===undefined)return sessionStorage.getItem(k);sessionStorage.setItem(k,v)}catch(e){return null}}
+
+var cur=null,capT=null,tkT=null,logT=null,heroT=null;
+
+/* ── RENDER ──────────────────────────────── */
+function render(key,fromUser){
+  var d=D[key];cur=d;
+  document.body.setAttribute('data-season',key);
+  document.title=(key==='s1'?'미슬토우':'미슬토우 : AFTER DARK')+' · JINGLE TV';
+  [].forEach.call(document.querySelectorAll('.sbtn'),function(b){var on=b.getAttribute('data-s')===key;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
+  try{history.replaceState(null,'','#'+key)}catch(e){}
+
+  /* hero */
+  var hero=$('hero');
+  [].forEach.call(hero.querySelectorAll('.slide'),function(x){x.remove()});
+  d.heroes.forEach(function(h,i){var im=document.createElement('img');im.className='slide'+(i===0?' on':'');im.src=A+h;im.alt=d.ko+' 출연진 단체 사진';hero.insertBefore(im,hero.firstChild)});
+  $('hdots').innerHTML=d.heroes.map(function(_,i){return '<i'+(i===0?' class="on"':'')+'></i>'}).join('');
+  var hi=0;clearInterval(heroT);
+  heroT=setInterval(function(){var sl=hero.querySelectorAll('.slide'),dt=$('hdots').children;if(!sl.length)return;hi=(hi+1)%sl.length;[].forEach.call(sl,function(x,j){x.classList.toggle('on',sl.length-1-j===hi)});[].forEach.call(dt,function(x,j){x.className=j===hi?'on':''})},5200);
+  $('heyebrow').textContent=d.eyebrow;
+  $('htitle').innerHTML=d.title;
+  $('hko').textContent=d.ko;
+  $('hhook').textContent=d.hook;
+  $('htag').textContent=key==='s1'?'SEASON 01':'SEASON 02';
+  $('hbadges').innerHTML='<span class="rate">'+esc(d.rating)+'</span>'+d.badges.map(function(b){return '<span>'+esc(b)+'</span>'}).join('');
+  makeSnow(key);
+
+  /* captions + ticker */
+  var ci=0,cap=$('cap');cap.textContent=d.caps[0];clearInterval(capT);
+  capT=setInterval(function(){cap.style.opacity=0;setTimeout(function(){ci=(ci+1)%d.caps.length;cap.textContent=d.caps[ci];cap.style.opacity=1},300)},4000);
+  var ti=0,tk=$('tk');tk.textContent=d.ticks[0];clearInterval(tkT);
+  tkT=setInterval(function(){tk.style.opacity=0;setTimeout(function(){ti=(ti+1)%d.ticks.length;tk.textContent=d.ticks[ti];tk.style.opacity=1},250)},3200);
+
+  /* body */
+  var h='';
+  h+=sec('about','PROGRAM','프로그램 소개','')+
+    '<div class="intro"><div class="panel"><p class="slogan">We bring the Christmas.<br>You bring the drama.</p><p>크리스마스는 저희가 준비할게요. 드라마는 여러분이 만드세요. — 징글 크루</p><div class="lead" style="margin:0">'+esc(d.about)+'</div><div class="kw">'+d.kw.map(function(k){return '<span class="tg">#'+esc(k)+'</span>'}).join('')+'</div></div>'+
+    '<div class="stats">'+d.stats.map(function(s){return '<div class="stat"><b>'+esc(s[0])+'</b><span>'+esc(s[1])+'</span></div>'}).join('')+'</div></div>';
+
+  h+=sec('cast','CAST','출연진','카드를 누르면 프로필을 볼 수 있어요')+
+    '<div class="cast">'+d.cast.map(function(c,i){return '<button class="cc" data-cast="'+i+'"><div class="im">'+img(faceOf(c,key),c.n)+'<div class="quote">'+esc(c.q)+'</div></div><div class="tx"><div class="nm">'+esc(c.n)+' <small>'+c.a+'세 · '+c.h+'</small></div><div class="rl">'+esc(c.job)+'</div>'+c.tags.map(function(t){return '<span class="tg">'+esc(t)+'</span>'}).join(' ')+'<div class="sw"><span>헤어 '+esc(c.hair)+'</span><span>눈 '+esc(c.eye)+'</span></div><div class="more">PROFILE ›</div></div></button>'}).join('')+'</div>';
+
+  h+=sec('house','HOUSE',d.houseName,d.houseKo)+
+    '<p class="lead">'+esc(d.houseLead)+'</p>';
+  if(d.housePh){
+    h+='<div class="grid-ph">'+d.housePh.map(function(p,i){return '<button class="ph'+(i===0?' wide':'')+'" data-gal="house" data-i="'+i+'">'+img(d.housePre+(p[0]<10?'0':'')+p[0]+'.png',p[1])+'<span>'+esc(p[1])+'</span></button>'}).join('')+'</div>';
+  }
+  h+='<h3 style="margin:28px 0 4px;font-family:\'Playfair Display\',serif;font-size:20px">MISTLETOE RESORT <small style="font-family:\'Noto Sans KR\';font-size:12px;color:var(--sub)">· 설산 리조트</small></h3>'+
+    '<div class="grid-ph">'+RESORT.map(function(p,i){return '<button class="ph'+(i===0?' wide':'')+'" data-gal="resort" data-i="'+i+'">'+img('place-resort-'+(p[0]<10?'0':'')+p[0]+'.png',p[1])+'<span>'+esc(p[1])+'</span></button>'}).join('')+'</div>';
+
+  h+=sec('crew','THE JINGLE CREW','제작진','')+
+    '<div class="crew">'+CREW.map(function(c,i){return '<button class="cr" data-crew="'+i+'"><div class="im">'+img('crew-'+c.id+'-01.png',c.n)+'</div><div class="tx"><div class="ro">'+esc(c.ro)+'</div><div class="n">'+esc(c.n)+'</div></div></button>'}).join('')+'</div>';
+
+  var c=$('content');c.innerHTML=h;c.classList.remove('fade');void c.offsetWidth;c.classList.add('fade');
+
+  $('footer').innerHTML='<b>JINGLE TV ORIGINAL</b><br>'+esc(d.ko)+' · '+esc(d.rating)+'<br>We bring the Christmas. You bring the drama.<br>본 페이지는 가상의 프로그램을 소개하는 팬메이드 페이지이며, 등장인물과 방송사는 모두 허구입니다.';
+
+  if(fromUser){window.scrollTo({top:0,behavior:'smooth'})}
+}
+function sec(id,en,ko,hint){return '<section id="'+id+'"><div class="sh"><h2><small>'+esc(en)+'</small>'+esc(ko)+'</h2><span class="hint">'+esc(hint)+'</span></div>'}
+function makeSnow(key){
+  var s=$('snow'),n=key==='s1'?36:26,h='';
+  for(var i=0;i<n;i++){var sz=key==='s1'?(2+Math.random()*5):(1.5+Math.random()*2.5);h+='<i style="left:'+(Math.random()*100)+'%;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(6+Math.random()*9)+'s;animation-delay:-'+(Math.random()*12)+'s;opacity:'+(.35+Math.random()*.6)+'"></i>'}
+  s.innerHTML=h;
+}
+
+/* ── MODAL & LIGHTBOX ────────────────────── */
+var gal=[],gi=0;
+function openLB(list,i){gal=list;gi=i;showLB();$('lb').classList.add('on')}
+function showLB(){$('lbi').src=A+gal[gi][0];$('lbi').alt=gal[gi][1];$('lbc').textContent=gal[gi][1]+'  ('+(gi+1)+' / '+gal.length+')'}
+function closeLB(){$('lb').classList.remove('on')}
+$('lbx').onclick=closeLB;
+$('lbp').onclick=function(){gi=(gi-1+gal.length)%gal.length;showLB()};
+$('lbn').onclick=function(){gi=(gi+1)%gal.length;showLB()};
+$('lb').addEventListener('click',function(e){if(e.target===this)closeLB()});
+
+function openCast(i){
+  var c=cur.cast[i],key=cur.key;
+  $('mbox').innerHTML='<button class="mx" aria-label="닫기">✕</button><div class="mtop"><div class="im">'+img(faceOf(c,key),c.n,false)+'<span class="mtag">'+(key==='s1'?'SEASON 01':'SEASON 02')+' · CAST</span></div><div class="mtx">'+
+   '<span class="tg">'+esc(cur.ko)+'</span><div class="nm" style="margin-top:6px">'+esc(c.n)+' <small>'+c.a+'세 · '+c.g+'</small></div><div class="rl" style="font-size:14px">'+esc(c.job)+'</div><div style="font-size:14px;font-style:italic;color:var(--acc);margin:4px 0">'+esc(c.q)+'</div>'+
+   '<dl class="prof"><dt>신체</dt><dd>'+c.h+' · 생일 '+c.b+' · '+c.smoke+'</dd><dt>헤어</dt><dd>'+esc(c.hair)+'</dd><dt>눈</dt><dd>'+esc(c.eye)+'</dd><dt>향</dt><dd>'+esc(c.scent)+'</dd><dt>성격</dt><dd>'+esc(c.per)+'</dd><dt>출연 계기</dt><dd>'+esc(c.mot)+'</dd><dt>취미·일상</dt><dd>'+esc(c.life)+'</dd></dl>'+
+   '<div style="margin-top:10px">'+c.tags.map(function(t){return '<span class="tg">'+esc(t)+'</span>'}).join(' ')+'</div></div></div>';
+  bindModal();
+}
+function openCrew(i){
+  var c=CREW[i];
+  $('mbox').innerHTML='<button class="mx" aria-label="닫기">✕</button><div class="mtop"><div class="im">'+img('crew-'+c.id+'-01.png',c.n,false)+'<span class="mtag">THE JINGLE CREW</span></div><div class="mtx"><div class="nm" style="margin-top:6px">'+esc(c.n)+' <small>'+esc(c.ro)+'</small></div></div></div>';
+  bindModal();
+}
+function bindModal(list){
+  var m=$('modal');m.classList.add('on');document.body.style.overflow='hidden';m.scrollTop=0;
+  m.querySelector('.mx').onclick=closeModal;
+  [].forEach.call(m.querySelectorAll('.mgrid button'),function(b){b.onclick=function(){openLB(list,+b.getAttribute('data-j'))}});
+}
+function closeModal(){$('modal').classList.remove('on');document.body.style.overflow=''}
+$('modal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',function(e){
+  if($('lb').classList.contains('on')){if(e.key==='Escape')closeLB();if(e.key==='ArrowLeft')$('lbp').click();if(e.key==='ArrowRight')$('lbn').click();return}
+  if(e.key==='Escape')closeModal();
+});
+
+/* delegated clicks in content */
+$('content').addEventListener('click',function(e){
+  var t=e.target.closest('[data-cast],[data-crew],[data-gal]');if(!t)return;
+  if(t.hasAttribute('data-cast'))openCast(+t.getAttribute('data-cast'));
+  else if(t.hasAttribute('data-crew'))openCrew(+t.getAttribute('data-crew'));
+  else if(t.hasAttribute('data-gal')){var g=t.getAttribute('data-gal'),l=g==='house'?cur.housePh.map(function(p){return[cur.housePre+(p[0]<10?'0':'')+p[0]+'.png',p[1]]}):RESORT.map(function(p){return['place-resort-'+(p[0]<10?'0':'')+p[0]+'.png',p[1]]});openLB(l,+t.getAttribute('data-i'))}
+});
+/* nav anchors: scroll without touching the season hash */
+[].forEach.call(document.querySelectorAll('.gnb a'),function(a){a.addEventListener('click',function(e){e.preventDefault();var el=$(a.getAttribute('href').slice(1));if(el)el.scrollIntoView({behavior:'smooth'})})});
+
+/* ── SEASON SWITCH ───────────────────────── */
+function go(key,fromUser){
+  if(key==='s2'){$('gate').classList.add('on');return}
+  render(key,fromUser);
+}
+$('gateOk').onclick=function(){$('gate').classList.remove('on');render('s2',true)};
+$('gateNo').onclick=function(){$('gate').classList.remove('on');if(!cur||cur.key!=='s1')render('s1');else{try{history.replaceState(null,'','#s1')}catch(e){}}};
+[].forEach.call(document.querySelectorAll('.sbtn'),function(b){b.onclick=function(){var k=b.getAttribute('data-s');if(!cur||cur.key!==k)go(k,true)}});
+$('prevS').onclick=$('nextS').onclick=function(){go(cur.key==='s1'?'s2':'s1',false)};
+(function(){var h=$('hero'),x0=null,y0=null;
+  h.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
+  h.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur.key==='s1'?'s2':'s1',false);x0=null},{passive:true});
+})();
+window.addEventListener('hashchange',function(){var k=location.hash.replace('#','');if((k==='s1'||k==='s2')&&cur&&k!==cur.key)go(k,false)});
+
+/* ── CLOCK & AIR STATUS ──────────────────── */
+function pad(n){return(n<10?'0':'')+n}
+function tick(){
+  var d=new Date();$('clk').textContent=pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+  var y=d.getFullYear(),start=new Date(y,10,24),end=new Date(y,11,26),st;
+  if(d<start){var dd=Math.ceil((start-d)/864e5);st='첫 방송 D-'+dd}
+  else if(d<end){var ep=Math.floor((d-start)/864e5)+1;st='EP.'+pad(ep)+' 방송 중'}
+  else st='전 회차 다시보기';
+  $('airStatus').textContent=st;
+}
+tick();setInterval(tick,1000);
+
+var init=location.hash.replace('#','');
+if(init==='s2')go('s2');else render('s1');
+})();
+</script>
+</body>
+</html>
