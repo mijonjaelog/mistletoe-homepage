@@ -56,6 +56,7 @@ a{color:inherit}
 .gnb::-webkit-scrollbar{display:none}
 .gnb a{flex:none;text-decoration:none;font-size:13px;font-weight:700;padding:9px 12px;opacity:.78}
 .gnb a:hover{opacity:1;color:var(--sel)}
+.gnb a.tz{color:var(--sel);opacity:1}
 
 /* ── HERO ────────────────────────────────────── */
 .hero{position:relative;margin-top:14px;border-radius:22px;overflow:hidden;min-height:520px;background:linear-gradient(135deg,var(--hero1),var(--hero2));color:#fff;box-shadow:var(--shadow);touch-action:pan-y}
@@ -372,7 +373,7 @@ section{padding-top:8px}
     </div>
   </div>
   <nav class="gnb wrap" aria-label="섹션 이동">
-    <a href="#about">프로그램 소개</a><a href="#cast">출연진</a><a href="#house">숙소</a><a href="#crew">제작진</a>
+    <a href="#about">프로그램 소개</a><a href="#cast">출연진</a><a href="#house">숙소</a><a href="#crew">제작진</a><a href="teaser.html" class="tz">▶ 티저</a>
   </nav>
 </header>
 
@@ -636,7 +637,7 @@ $('content').addEventListener('click',function(e){
   else if(t.hasAttribute('data-gal')){var g=t.getAttribute('data-gal'),l=g==='house'?cur.housePh.map(function(p){return[cur.housePre+(p[0]<10?'0':'')+p[0]+'.png',p[1]]}):RESORT.map(function(p){return['place-resort-'+(p[0]<10?'0':'')+p[0]+'.png',p[1]]});openLB(l,+t.getAttribute('data-i'))}
 });
 /* nav anchors: scroll without touching the season hash */
-[].forEach.call(document.querySelectorAll('.gnb a'),function(a){a.addEventListener('click',function(e){e.preventDefault();var el=$(a.getAttribute('href').slice(1));if(el)el.scrollIntoView({behavior:'smooth'})})});
+[].forEach.call(document.querySelectorAll('.gnb a[href^="#"]'),function(a){a.addEventListener('click',function(e){e.preventDefault();var el=$(a.getAttribute('href').slice(1));if(el)el.scrollIntoView({behavior:'smooth'})})});
 
 /* ── SEASON SWITCH ───────────────────────── */
 /* season intro splash: S1 on first visit, S2 (with age check) on every entry */
