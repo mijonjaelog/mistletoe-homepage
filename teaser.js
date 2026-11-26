@@ -50,7 +50,7 @@ var M1=['s1-yeonwoo-snow.png','s1-seoa-snow.png','s1-taegyeom-date.png','s1-dain
 var M2=['s2-mujin-date.png','s2-rahee-party.png','s2-igeon-night.png','s2-jaeheon-party.png','s2-yunjae-party.png','s2-iseo-party.png','s2-seon-party.png','s2-jaeheon-date.png'];
 function beats(n){return Math.round(n*BEAT*1000)}
 var MSTEP=.7;                       /* montage: seconds per shot */
-var ASK=KEY==='s1'?2000:2175;         /* two question cards fill the music break exactly */
+var ASK=KEY==='s1'?2000:2250;         /* two question cards fill the music break exactly */
 var SCRIPT={
 s1:{rate:'all',mont:M1,end:{bg:'s1-group-2.png',dim:'rgba(244,236,223,.55)',title:'MISTLETOE',ko:'《미슬토우》',d:'11.24 첫 방송 · 크리스마스까지 매일 밤',go:'index.html#s1',other:['JINGLE TV 심야 편성','미슬토우 : AFTER DARK 티저 ›','teaser-s2.html']},
  T:[
