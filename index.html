@@ -526,6 +526,7 @@ function render(key,fromUser){
   var d=D[key];cur=d;
   document.body.setAttribute('data-season',key);
   document.title=(key==='s1'?'미슬토우':'미슬토우 : AFTER DARK')+' · JINGLE TV';
+  var tz=document.querySelector('.gnb a.tz');if(tz)tz.setAttribute('href','teaser-'+key+'.html');
   [].forEach.call(document.querySelectorAll('.sbtn'),function(b){var on=b.getAttribute('data-s')===key;b.classList.toggle('on',on);b.setAttribute('aria-selected',on)});
   try{history.replaceState(null,'','#'+key)}catch(e){}
 
