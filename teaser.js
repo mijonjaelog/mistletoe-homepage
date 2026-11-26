@@ -21,7 +21,8 @@ sndB.onclick=function(){muted=!muted;music.muted=muted;sndB.textContent=muted?'�
 var timers=[];
 function later(fn,ms){timers.push(setTimeout(fn,ms))}
 function show(h){var d=document.createElement('div');d.className='scene';d.innerHTML=h;stage.innerHTML='';stage.appendChild(d);return d}
-function bg(src,mode,dim){return '<div class="bg '+(mode||'kin')+'" style="background-image:url('+A+src+')"></div><div class="dim" style="background:'+(dim||'rgba(0,0,0,.25)')+'"></div>'}
+/* whole photo always inside the frame: blurred copy fills the screen, the full image sits on top */
+function bg(src,mode,dim){var u='url('+A+src+')';return '<div class="bgfill" style="background-image:'+u+'"></div><div class="bg fit '+(mode||'kin').split(' ')[0]+'" style="background-image:'+u+'"></div><div class="dim" style="background:'+(dim||'rgba(0,0,0,.25)')+'"></div>'}
 function fx(n){var h='<div class="fx">';for(var i=0;i<n;i++){var sz=KEY==='s1'?(2+Math.random()*5):(3+Math.random()*11); /* S2: soft floating bokeh */h+='<i style="left:'+(Math.random()*100)+'%;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(6+Math.random()*8)+'s;animation-delay:-'+(Math.random()*12)+'s;opacity:'+(.4+Math.random()*.6)+'"></i>'}return h+'</div>'}
 var tc0=0;
 function rec(cam){return '<div class="rec"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><span class="r">REC</span><span class="tc" id="tc">00:00:00:00</span><span class="cam">'+(cam||'CAM 02 · INTERVIEW')+'</span></div>'}
@@ -41,7 +42,7 @@ function sPlace(src,label,mode){return function(){show(bg(src,mode||'pan','rgba(
 function sGroup(src,line,mode){return function(){show(bg(src,mode||'kin','linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.2) 55%,rgba(0,0,0,.65))')+fx(30)+'<div class="sub"><span>'+line+'</span></div>')}}
 function sGrid(cap){return function(){var h=IDS.map(function(id,i){return '<div style="animation-delay:'+(i*.32)+'s"><img src="'+A+face(id)+'" alt=""><span>'+C[id][0]+'</span></div>'}).join('')+'<div class="q" style="animation-delay:'+(IDS.length*.32)+'s">?</div>';show(fx(20)+'<div class="grid">'+h+'</div><div class="gridcap" style="animation-delay:'+(IDS.length*.32+.6)+'s">'+cap+'</div>')}}
 /* highlight montage: situational shots, one per beat */
-function sMontage(list){return function(){var h=list.map(function(src,i){return '<div style="background-image:url('+A+src+');animation-delay:'+(i*MSTEP)+'s;--md:'+MSTEP+'s"></div>'}).join('');show('<div class="mont">'+h+'</div><div class="dim" style="background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45))"></div>'+fx(20))}}
+function sMontage(list){return function(){var h=list.map(function(src,i){var u='url('+A+src+')';return '<div style="animation-delay:'+(i*MSTEP)+'s;--md:'+MSTEP+'s"><i style="background-image:'+u+'"></i><b style="background-image:'+u+'"></b></div>'}).join('');show('<div class="mont">'+h+'</div><div class="dim" style="background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.45))"></div>'+fx(20))}}
 function sTitle(k,t1,t2,t3,dim){return function(){show('<div class="dim" style="background:'+dim+'"></div>'+fx(KEY==='s1'?46:36)+'<div class="tt"><div class="k">'+k+'</div><div class="t1">'+t1+'</div><div class="t2">'+t2+'</div><div class="t3">'+t3+'</div></div>'+trans)}}
 function airStatus(){var d=new Date(),y=d.getFullYear(),st=new Date(y,10,24),en=new Date(y,11,26);if(d<st)return '첫 방송 D-'+Math.ceil((st-d)/864e5);if(d<en)return 'EP.'+('0'+(Math.floor((d-st)/864e5)+1)).slice(-2)+' 지금 방송 중';return '전 회차 다시보기'}
 
@@ -119,8 +120,10 @@ function play(){
   cancelAnimationFrame(raf);clear();idx=0;skipB.style.display='';setRate(SCRIPT.rate);tc0=Date.now();startWall=Date.now();
   prog.style.transition='none';prog.style.width='0';
   useMusic=true;music.muted=muted;
-  try{music.currentTime=0}catch(err){}
-  var p=music.play();if(p&&p.catch)p.catch(function(){useMusic=false;startWall=Date.now()});
+  var at=+(new URLSearchParams(location.search).get('at')||0); /* hidden: ?at=seconds jumps ahead (for checking a scene) */
+  startWall=Date.now()-at*1000;
+  try{music.currentTime=at}catch(err){}
+  var p=music.play();if(p&&p.catch)p.catch(function(){useMusic=false;startWall=Date.now()-at*1000});
   loop();
 }
 skipB.onclick=function(){endCard(true)};
