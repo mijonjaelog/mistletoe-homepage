@@ -206,7 +206,7 @@ section{padding-top:8px}
 .ph.wide{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
 
 /* crew */
-.crew{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:16px}
+.crew{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}
 .cr{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;text-align:left;box-shadow:var(--shadow)}
 .cr .im{aspect-ratio:1/1;overflow:hidden}
 .cr img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
@@ -297,6 +297,62 @@ section{padding-top:8px}
   .sh .hint{display:none}
   .stat b{font-size:20px}
 }
+/* ── INTRO (season splash) ── */
+.splash{position:fixed;inset:0;z-index:150;display:none;align-items:center;justify-content:center;padding:20px 16px;overflow:hidden;text-align:center}
+.splash.on{display:flex;animation:fd .45s}
+.ibg{position:absolute;inset:-24px;background-size:cover;background-position:center 22%;transform:scale(1.04)}
+.ibg:after{content:"";position:absolute;inset:0}
+.ifx{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.ifx i{position:absolute;top:-10px;border-radius:50%;animation:ifall linear infinite}
+@keyframes ifall{to{transform:translate3d(40px,105vh,0)}}
+.ibox{position:relative;z-index:2;max-width:440px;width:100%;padding:36px 26px 24px;border-radius:22px;overflow:hidden}
+.ibox:before{content:"";position:absolute;left:0;right:0;top:0;height:8px}
+.ilogo{font-weight:900;letter-spacing:3px;font-size:13px}.ilogo b{margin:0 2px}.ilogo span{font-size:10px;letter-spacing:2px;opacity:.7;margin-left:6px}
+.iribbon{display:inline-block;font-size:10.5px;font-weight:900;letter-spacing:2px;padding:5px 12px;border-radius:99px;margin-top:14px}
+.ititle{font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,12vw,66px);line-height:1;margin:10px 0 0}
+.isub{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;letter-spacing:2px;margin-top:8px}
+.ihook{font-family:'Noto Serif KR',serif;font-weight:600;font-size:16px;margin:14px 0 10px}
+.imeta{font-size:12.5px;opacity:.85;margin-bottom:18px}.imeta em{font-style:normal;font-weight:900;border-radius:6px;padding:2px 7px;margin-right:6px;color:#fff}
+.iwarn{font-size:13px;line-height:1.75;margin:0 0 18px}
+.ienter{display:block;width:100%;border:0;border-radius:12px;padding:14px;font-weight:900;font-size:15px;cursor:pointer;color:#fff;letter-spacing:.5px}
+.iswap{margin-top:12px;background:none;border:0;font-size:12.5px;font-weight:700;cursor:pointer;opacity:.75;color:inherit;text-decoration:underline;text-underline-offset:3px}
+.iswap:hover{opacity:1}
+.splash .g19{margin:14px auto 0}
+/* S1: cream, holly red, pine */
+.splash[data-k="s1"]{background:#f4ecdf;color:#3a1d1d}
+.splash[data-k="s1"] .ibg{opacity:.42;filter:blur(2px) saturate(.85)}
+.splash[data-k="s1"] .ibg:after{background:radial-gradient(circle at 50% 45%,rgba(250,244,234,.35),rgba(244,236,223,.92) 75%)}
+.splash[data-k="s1"] .ifx i{background:#fff;box-shadow:0 0 4px rgba(150,170,190,.6)}
+.splash[data-k="s1"] .ibox{background:rgba(255,251,245,.9);border:2px solid #b3243a;box-shadow:0 20px 50px rgba(90,30,30,.22)}
+.splash[data-k="s1"] .ibox:before{background:repeating-linear-gradient(45deg,#b3243a 0 10px,#fff 10px 20px)}
+.splash[data-k="s1"] .ilogo b{color:#b3243a}
+.splash[data-k="s1"] .iribbon{background:#2f5d46;color:#fff}
+.splash[data-k="s1"] .ititle{color:#b3243a}
+.splash[data-k="s1"] .isub{color:#2f5d46}
+.splash[data-k="s1"] .imeta em{background:#2f5d46}
+.splash[data-k="s1"] .ienter{background:#b3243a;box-shadow:0 8px 18px rgba(179,36,58,.3)}
+/* S2: black, wine, gold */
+.splash[data-k="s2"]{background:#0b0608;color:#f3e6da}
+.splash[data-k="s2"] .ibg{opacity:.38;filter:blur(1px) saturate(1.1)}
+.splash[data-k="s2"] .ibg:after{background:radial-gradient(circle at 50% 40%,rgba(90,15,34,.35),rgba(11,6,8,.95) 72%)}
+.splash[data-k="s2"] .ifx i{background:#f2c46b;box-shadow:0 0 8px #f2c46b}
+.splash[data-k="s2"] .ibox{background:rgba(22,11,15,.82);border:1px solid #5a2a38;box-shadow:0 20px 60px rgba(0,0,0,.6);backdrop-filter:blur(6px)}
+.splash[data-k="s2"] .ibox:before{height:3px;background:linear-gradient(90deg,transparent,#d4af6a,transparent)}
+.splash[data-k="s2"] .ilogo b{color:#d4af6a}
+.splash[data-k="s2"] .ititle{background:linear-gradient(180deg,#f6e2b3,#c9963f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.splash[data-k="s2"] .isub{color:#d4af6a}
+.splash[data-k="s2"] .iwarn{color:#c9b8bd}.splash[data-k="s2"] .iwarn b{color:#f0c9a4}
+.splash[data-k="s2"] .ienter{background:linear-gradient(135deg,#c23a55,#7a1430);box-shadow:0 8px 22px rgba(194,58,85,.35)}
+.splash[data-k="s2"] .iswap{color:#f0c9a4}
+/* crew popup: full-bleed photo card */
+.mbox.crewbox{max-width:420px}
+.mcrew{position:relative;aspect-ratio:832/1216;max-height:86vh;margin:0 auto;background:var(--bg2)}
+.mcrew img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.mcrew:after{content:"";position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.82))}
+.mcrew .cap2{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:18px 20px 20px;color:#fff;text-align:left}
+.mcrew .cap2 .ro{font-size:11px;font-weight:900;letter-spacing:2px;color:#f2c46b}
+.mcrew .cap2 .n{font-size:26px;font-weight:900;margin-top:2px}
+.mcrew .cap2 .s{font-size:13px;opacity:.85}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -325,8 +381,8 @@ section{padding-top:8px}
     <div class="snow" id="snow"></div>
     <span class="htag" id="htag">JINGLE TV ORIGINAL</span>
     <div class="hdots" id="hdots"></div>
-    <button class="harrow l" id="prevS" aria-label="이전 시즌">‹</button>
-    <button class="harrow r" id="nextS" aria-label="다음 시즌">›</button>
+    <button class="harrow l" id="prevS" aria-label="이전 사진">‹</button>
+    <button class="harrow r" id="nextS" aria-label="다음 사진">›</button>
     <div class="hin">
       <div class="eyebrow" id="heyebrow"></div>
       <div class="htitle" id="htitle"></div>
@@ -351,14 +407,10 @@ section{padding-top:8px}
   <div class="lbc" id="lbc"></div>
   <button class="n" id="lbn" aria-label="다음">›</button>
 </div>
-<div class="gate" id="gate">
-  <div class="gbox">
-    <div class="g19">19</div>
-    <b>MISTLETOE : AFTER DARK</b>
-    <p>시즌 2는 성인 대상 프로그램입니다.<br>음주·흡연 장면과 성인 시청자 반응이 포함되어 있습니다.<br>만 19세 이상이신가요?</p>
-    <button class="ok" id="gateOk">19세 이상, 입장하기</button>
-    <button class="no" id="gateNo">시즌 1로 돌아가기</button>
-  </div>
+<div class="splash" id="splash" data-k="s1" role="dialog" aria-modal="true">
+  <div class="ibg" id="ibg"></div>
+  <div class="ifx" id="ifx"></div>
+  <div class="ibox" id="ibox"></div>
 </div>
 
 <script>
@@ -371,7 +423,8 @@ var CREW=[
  {id:'jingle',ro:'MAIN HOST',n:'미스터 징글'},
  {id:'santa',ro:'EXECUTIVE PRODUCER',n:'산타 PD'},
  {id:'rudolph',ro:'FIELD DIRECTOR',n:'루돌프 AD'},
- {id:'elf',ro:'PRODUCTION STAFF',n:'엘프 스태프'},
+ {id:'elf',ro:'PRODUCTION STAFF',n:'엘프 스태프',s:'여성 스태프'},
+ {id:'elfm',ro:'PRODUCTION STAFF',n:'엘프 스태프',s:'남성 스태프'},
  {id:'grinch',ro:'PRODUCER',n:'그린치 PD'}
 ];
 
@@ -384,32 +437,32 @@ s1:{
  heroes:['s1-group-1.png','s1-group-2.png'],
  badges:['11.24 — 12.25','설산 MISTLETOE RESORT','성인 남녀 8인'],
  caps:['“첫눈이 내리던 날, 낯선 사람들이 같은 집에 도착했다.”','[자막] 벽난로 앞, 아직 아무도 모르는 마음','크리스마스, 당신은 누구를 선택할까?','[자막] 눈이 그치기 전에 전하고 싶은 말'],
- ticks:['문다인 웃는 거 봐 ㅠㅠㅠ','채서아 컵 내려놓는 타이밍 뭐야ㅋㅋㅋ','아니 내 커플 주식 어쩌라고요','주연우 오늘 진짜 용기 냈다','데이트 한번인데 너무 앞서가지 말자','다음 장면 제발 끊지 마','남시온 말없이 차 내려주는 거 봤어?','한결 피아노 치는 장면 언제 나와요'],
+ ticks:['남시온 말없이 차 내려주는 거 봤어? 이게 어른의 다정이다','주연우 드립 타율 오늘 8할 넘음ㅋㅋㅋ','유태겸 필름 카메라 들고 다니는 거 실화냐','한결 피아노 치는 장면 언제 나와요 제발','채서아 리본 묶는 손 너무 섬세함 ㅠ','문다인 웃는 거 봐 ㅠㅠㅠ 빙판 위 미소 그 자체','신해린 건조한 농담 계속 듣고 싶다','아니 내 커플 주식 어쩌라고요','데이트 한번인데 너무 앞서가지 말자','숙소 벽난로 매물 어디서 구함?','윈터 하우스 주방 우리 집보다 큼','첫눈 오는 장면 배경화면 각','이 프로 보면서 귤 다섯 개 깜','오늘 BGM 선곡한 PD님 승진하세요','루돌프 AD 또 공지 꼬였어ㅋㅋㅋㅋ','징글 MC 멘트 능청 미쳤다','다들 니트 어디 거예요 정보 좀','눈사람 만드는 장면 왜 이렇게 귀여움','편집점 여기서 끊는 거 너무해','크리스마스까지 매일 본방사수합니다'],
  about:'눈 덮인 설산의 MISTLETOE RESORT. 서로 모르는 성인 남녀가 WINTER HOUSE에 모여 크리스마스까지 한 지붕 아래에서 겨울을 보냅니다. 함께 밥을 짓고, 설원을 걷고, 벽난로 앞에서 이야기를 나눕니다. 정해진 커플도, 보장된 결말도 없습니다. 크리스마스에 마지막으로 웃는 사람은 누구일까요?',
  kw:['겨울 로맨스','설렘','우정','크리스마스'],
  stats:[['11.24','첫 입주 · FIRST SNOW'],['8인','성인 남녀 참가자'],['12.25','OUR FIRST CHRISTMAS'],['ALL','전체 이용가']],
  cast:[
   {id:'sion',n:'남시온',a:28,g:'남',job:'건축설계사',h:'185cm',b:'02.07',smoke:'비흡연',scent:'편백 · 화이트 머스크',hair:'뮤트 세이지 그린',eye:'미스트 제이드',
    tags:['#차분한다정','#말보다행동','#캐러멜푸딩'],q:'“밖에 많이 춥죠. 따뜻한 차도 있는데, 드실래요?”',
-   per:'차분·섬세·성실·생활력·은근한 고집. 작은 습관과 취향을 기억하고, 말보다 행동으로 보여준다.',mot:'일과 집만 반복하던 생활에서 벗어나 일상을 공유하는 연애를 기대.',life:'아침형 · 커피 · 요리 · 독서 · 건축 사진 · 정리'},
+   per:'차분 · 섬세 · 성실',mot:'일상을 함께 나눌 사람을 만나고 싶어서',life:'요리 · 독서 · 건축 사진'},
   {id:'yeonwoo',n:'주연우',a:25,g:'남',job:'광고 카피라이터',h:'181cm',b:'06.12',smoke:'비흡연',scent:'유자 · 네롤리',hair:'뮤트 애프리콧 오렌지',eye:'스모키 바이올렛',
    tags:['#능글유쾌','#분위기메이커','#말장난장인'],q:'“여기 자리 있어요. 컵은 누가 이렇게 예쁘게 골라 놨어요?”',
-   per:'능글·유쾌·사교적·재치·승부욕. 대화를 주도하고 민망함은 농담으로 넘기지만, 진지한 감정 앞에선 서툴다.',mot:'재미있는 크리스마스와 예상 밖의 설렘.',life:'야행성 · 보드게임 · 즉흥 여행 · 크리스마스 음악 · 디저트'},
+   per:'능글 · 유쾌 · 사교적',mot:'예상 밖의 설렘을 기대해서',life:'보드게임 · 즉흥 여행 · 디저트'},
   {id:'taegyeom',n:'유태겸',a:29,g:'남',job:'다큐멘터리 촬영감독',h:'189cm',b:'11.18',smoke:'비흡연',scent:'시더우드 · 베르가못',hair:'슬레이트 블루',eye:'올드 골드',
    tags:['#무심한듯세심','#필름카메라','#명확한제안'],q:'“돌려 말하는 건 잘 못해요. 같이 걸을래요?”',
-   per:'독립적·관찰형·현실적. 허세와 과장된 친절을 싫어하고 필요한 말은 직접 한다.',mot:'타인의 이야기를 기록하던 일에서 벗어나 자신의 경험을 만들기.',life:'새벽 산책 · 필름 사진 · 등산 · 커피 · 설경 촬영'},
-  {id:'hangyeol',n:'한결',a:23,g:'남',job:'피아노 연주자 · 프리랜서 반주자',h:'183cm',b:'02.23',smoke:'비흡연',scent:'바이올렛 리프 · 앰브레트',hair:'딥 내추럴 블랙',eye:'로즈 브라운',
+   per:'독립적 · 관찰형 · 현실적',mot:'기록하는 대신 직접 경험해 보고 싶어서',life:'필름 사진 · 등산 · 새벽 산책'},
+  {id:'hangyeol',n:'한결',a:23,g:'남',job:'피아노 연주자',h:'183cm',b:'02.23',smoke:'비흡연',scent:'바이올렛 리프 · 앰브레트',hair:'딥 내추럴 블랙',eye:'로즈 브라운',
    tags:['#차분한절제','#피아노','#건조한농담'],q:'“커피 드세요? 지금 내리려던 참이라.”',
-   per:'차분·절제·독립적·은근한 장난기. 말보다 관찰하고, 친해지면 건조한 농담을 던진다. 감정 표현이 조금 늦다.',mot:'정해진 악보 밖의 인연을 만나고 싶어서.',life:'피아노 · 독서 · 커피 · 산책'},
-  {id:'seoa',n:'채서아',a:26,g:'여',job:'플로리스트 · 꽃 작업실 운영',h:'164cm',b:'04.16',smoke:'비흡연',scent:'프리지아 · 화이트 티',hair:'뮤트 블러시 핑크',eye:'프로스트 블루',
+   per:'차분 · 절제 · 은근한 장난기',mot:'정해진 악보 밖의 인연을 찾아서',life:'피아노 · 독서 · 커피'},
+  {id:'seoa',n:'채서아',a:26,g:'여',job:'플로리스트',h:'164cm',b:'04.16',smoke:'비흡연',scent:'프리지아 · 화이트 티',hair:'뮤트 블러시 핑크',eye:'프로스트 블루',
    tags:['#온화한섬세함','#손편지','#부드럽지만단호'],q:'“제가 아까 색깔만 맞춰 봤어요. 마음에 드는 걸로 쓰세요.”',
-   per:'온화·섬세·감수성·자기 기준. 친절하지만 무조건 양보하지 않고, 갈등은 생각을 정리한 뒤 대화로 푼다.',mot:'남의 기념일을 위한 꽃을 만들다, 처음으로 자신을 위한 크리스마스를 기대.',life:'꽃 장식 · 리본 공예 · 차 · 손편지 · 딸기 케이크 · 밀크티'},
+   per:'온화 · 섬세 · 단단함',mot:'처음으로 나를 위한 크리스마스를 보내고 싶어서',life:'꽃 장식 · 손편지 · 밀크티'},
   {id:'dain',n:'문다인',a:24,g:'여',job:'피겨스케이팅 코치',h:'168cm',b:'01.26',smoke:'비흡연',scent:'그린애플 · 민트',hair:'스모키 펄 실버',eye:'딥 오베르진',
    tags:['#직진승부사','#빙판위코치','#솔직반말'],q:'“그건 사람마다 생각이 좀 다를걸? 아무튼 반가워요.”',
-   per:'직진·솔직·활동적·낙천적·승부욕. 호불호가 분명하고 먼저 말을 건다. 감정이 얼굴에 그대로 드러난다.',mot:'운동과 일 밖의 새로운 자극, 솔직하게 다가오는 사람.',life:'스케이트 · 게임 · 야외 활동 · 매운 음식 · 탄산음료'},
+   per:'직진 · 솔직 · 활동적',mot:'솔직하게 다가오는 사람을 만나고 싶어서',life:'스케이트 · 게임 · 매운 음식'},
   {id:'haerin',n:'신해린',a:28,g:'여',job:'패션 매거진 에디터',h:'172cm',b:'09.23',smoke:'비흡연',scent:'무화과 · 아이리스',hair:'뮤트 플랙스 베이지',eye:'딥 파인 그린',
    tags:['#도회적분석가','#건조한유머','#재즈와향수'],q:'“첫인상으로 판단하진 않아요. 기억은 해 두지만요.”',
-   per:'도회적·분석적·독립적. 취향과 기준이 분명하고 누군가의 관심을 위해 자신을 바꾸지 않는다. 친해지면 장난이 많다.',mot:'직업적 평가 없이 자신을 알아가 줄 사람을 기대.',life:'재즈 · 전시 · 향수 · 독서 · 얼그레이 · 다크초콜릿'}
+   per:'도회적 · 분석적 · 독립적',mot:'평가 없이 나를 알아가 줄 사람을 찾아서',life:'재즈 · 전시 · 향수'}
  ],
  houseName:'WINTER HOUSE',houseKo:'윈터 하우스',
  houseLead:'통나무 벽과 벽난로, 창밖 가득한 설경. 참가자들이 크리스마스까지 함께 지낼 겨울 별장입니다.',
@@ -422,32 +475,32 @@ s2:{
  heroes:['s2-group-1.png','s2-group-2.png'],
  badges:['11.24 — 12.25','AFTER DARK HOUSE','성인 남녀 8인'],
  caps:['“같은 리조트, 다른 밤.”','[자막] 정규 일정이 끝난 뒤부터가 진짜','AFTER DARK — 오늘 밤의 주인공은?','[자막] 크리스마스까지, 마음은 아직 비공개'],
- ticks:['와 저걸 바로 수락하네ㅋㅋㅋㅋ','서라희 표정 순식간에 굳는 거 봐','내 커플 오늘 장례 치릅니다','백이건 말 돌리지 않는 거 좋다','그냥 데이트 신청임 아직 모른다','여기서 광고 넣으면 진짜 화낸다','도윤재 직구 미쳤다','차무진 결론부터 말하는 거 미쳤다'],
+ ticks:['차무진 결론부터 말하는 거 미쳤다','백이건 당구 큐 내려놓는 거 왜 이렇게 여유로움','류재헌 향 얘기할 때 분위기 바뀌는 거 봄?','도윤재 직구 미쳤다 돌려 말하는 법 모름','서라희 등장할 때마다 화면 밝아짐','진세온 냅킨에 그린 그림 굿즈로 내주세요','한이서 한마디에 라운지 공기 정리됨','와 저걸 바로 수락하네ㅋㅋㅋㅋ','내 커플 오늘 장례 치릅니다','그냥 데이트 신청임 아직 모른다','여기서 광고 넣으면 진짜 화낸다','벨벳 바 조명 누가 세팅했냐 너무 예쁨','오늘 의상팀 일 제대로 했다','새벽 1시인데 아무도 안 자네ㅋㅋ','눈빛 교환 3초 컷 다시 돌려봄','이 집 소파 색 이름 아는 사람','다트 승부 진심인 거 너무 웃겨','중립기어 박고 다음 화 기다린다','그린치 PD 표정 하나도 안 변함ㅋㅋㅋ','본방 끝나고 바로 정주행 각'],
  about:'같은 설산 리조트, 다른 밤. AFTER DARK HOUSE에 입주한 성인 남녀가 크리스마스까지 매력과 취향으로 부딪힙니다. 벨벳 조명 아래의 라운지, 늦은 밤의 대화, 예상하지 못한 선택. 로맨스는 선택이고, 밤은 깁니다.',
  kw:['매력','취향','경쟁','심야 로맨스'],
  stats:[['11.24','첫 입주 · FIRST IMPRESSION'],['8인','성인 남녀 참가자'],['12.25','CHRISTMAS'],['19','성인 시청자 전용']],
  cast:[
   {id:'mujin',n:'차무진',a:31,g:'남',job:'프라이빗 라운지 브랜드 대표',h:'191cm',b:'12.08',smoke:'흡연',scent:'레더 · 베티버 · 앰버',hair:'블랙 체리',eye:'플래티넘 그레이',
    tags:['#결론부터','#협상가','#위스키와재즈'],q:'“결론부터 말하죠. 오늘 밤, 시간 있어요?”',
-   per:'자신감·결단력·직접적·승부욕. 기회를 놓치지 않고 변명하지 않는다. 감정적 약점을 보이는 데는 서툴다.',mot:'예측하기 어려운 사람들과의 경쟁과 교류.',life:'웨이트 · 위스키 · 재즈 · 시가 문화 · 늦게 잠'},
+   per:'자신감 · 결단력 · 직설적',mot:'예측할 수 없는 사람들과 부딪혀 보고 싶어서',life:'웨이트 · 위스키 · 재즈'},
   {id:'igeon',n:'백이건',a:27,g:'남',job:'DJ · 음악 프로듀서',h:'184cm',b:'07.30',smoke:'흡연',scent:'라임 · 진저 · 스모키 머스크',hair:'더스티 로즈 코퍼',eye:'뮤트 올리브',
    tags:['#즉흥능글','#판을즐기는','#심야산책'],q:'“와, 분위기부터 돈 좀 썼네. 여기 진짜 크리스마스 맞죠?”',
-   per:'능글·즉흥·낙천·자유분방. 예상 밖의 반응을 즐기고 경쟁 중에도 농담을 던진다. 진심과 농담의 경계가 모호하다.',mot:'크리스마스의 새로운 경험.',life:'음악 · 클럽 문화 · 당구 · 심야 산책 · 늦은 기상'},
-  {id:'jaeheon',n:'류재헌',a:29,g:'남',job:'프래그런스 브랜드 크리에이티브 디렉터',h:'187cm',b:'10.17',smoke:'비흡연',scent:'블랙티 · 샌들우드 · 스파이스',hair:'딥 인디고 바이올렛',eye:'가넷 로즈',
+   per:'능글 · 즉흥 · 자유분방',mot:'색다른 크리스마스를 보내고 싶어서',life:'음악 · 당구 · 심야 산책'},
+  {id:'jaeheon',n:'류재헌',a:29,g:'남',job:'프래그런스 크리에이티브 디렉터',h:'187cm',b:'10.17',smoke:'비흡연',scent:'블랙티 · 샌들우드 · 스파이스',hair:'딥 인디고 바이올렛',eye:'가넷 로즈',
    tags:['#절제된관찰자','#향에민감','#계산된제안'],q:'“아까와 향이 달라졌네요. 조금 더 가벼운 쪽으로.”',
-   per:'침착·관찰·감각·계산적. 취향과 패턴을 읽고 행동하지만 속내는 잘 설명하지 않는다.',mot:'통제된 일상에서 벗어나 새로운 취향 경험.',life:'향수 · 와인 · 전시 · 심야 음악 · 차'},
-  {id:'yunjae',n:'도윤재',a:28,g:'남',job:'전직 펜싱 선수 · 펜싱 코치',h:'188cm',b:'08.09',smoke:'비흡연',scent:'주니퍼 · 화이트 스웨이드',hair:'더스티 펀',eye:'펄 오팔',
+   per:'침착 · 관찰형 · 감각적',mot:'통제된 일상 밖의 취향을 찾아서',life:'향수 · 와인 · 전시'},
+  {id:'yunjae',n:'도윤재',a:28,g:'남',job:'펜싱 코치',h:'188cm',b:'08.09',smoke:'비흡연',scent:'주니퍼 · 화이트 스웨이드',hair:'더스티 펀',eye:'펄 오팔',
    tags:['#직구','#결과로증명','#야간산책'],q:'“돌려 말 안 할게요. 같이 걸어요, 지금.”',
-   per:'승부욕·직설·침착·자기 기준. 사람을 이기려 하기보다 결과로 증명한다. 감정 설명엔 서툴지만 실수는 인정한다.',mot:'승패 없는 관계를 경험해 보고 싶어서.',life:'운동 · 요리 · 탄산수 · 야간 산책'},
+   per:'승부욕 · 직설 · 침착',mot:'승패 없는 관계를 경험해 보고 싶어서',life:'운동 · 요리 · 야간 산책'},
   {id:'rahee',n:'서라희',a:28,g:'여',job:'광고 · 뷰티 모델',h:'170cm',b:'08.19',smoke:'흡연',scent:'블랙커런트 · 다마스크 로즈',hair:'뮤트 가넷 크림슨',eye:'페일 휘트 헤이즐',
    tags:['#대담한직진','#먼저제안','#밤라운지'],q:'“그럼 먼저 인사하는 건 자유죠? 어디 앉으실래요?”',
-   per:'자신감·솔직·사교·대담. 주목을 즐기지만 관심을 구걸하지 않는다. 기회는 직접 만든다.',mot:'자유로운 환경에서 다양한 사람을 만나기.',life:'필라테스 · 패션 · 향수 · 사진 · 밤 라운지'},
-  {id:'seon',n:'진세온',a:25,g:'여',job:'타투이스트 · 일러스트레이터',h:'162cm',b:'05.29',smoke:'흡연',scent:'블랙베리 · 바닐라 · 머스크',hair:'라일락 펄',eye:'뮤트 코랄',
+   per:'대담 · 솔직 · 사교적',mot:'자유롭게 다양한 사람을 만나고 싶어서',life:'필라테스 · 패션 · 사진'},
+  {id:'seon',n:'진세온',a:25,g:'여',job:'타투이스트',h:'162cm',b:'05.29',smoke:'흡연',scent:'블랙베리 · 바닐라 · 머스크',hair:'라일락 펄',eye:'뮤트 코랄',
    tags:['#예측불가','#별자리타투','#심야창작'],q:'“그럼 뭐 하러 데려왔겠어. 일단 설명부터 들어 봐.”',
-   per:'짓궂음·자유분방·독특한 감각·순발력. 예상 밖의 대답으로 긴장을 푼다. 쉽게 싫증 낸다.',mot:'평소 만나지 못한 유형과의 교류.',life:'드로잉 · 게임 · 다트 · 인디 음악 · 심야 창작'},
+   per:'짓궂음 · 자유분방 · 순발력',mot:'평소 못 만나 본 사람들이 궁금해서',life:'드로잉 · 다트 · 인디 음악'},
   {id:'iseo',n:'한이서',a:30,g:'여',job:'아트 갤러리 디렉터',h:'173cm',b:'03.14',smoke:'비흡연',scent:'블랙 아이리스 · 파촐리',hair:'딥 피콕 그린',eye:'그래파이트 그레이',
    tags:['#절제된우아함','#명확한기준','#솔직함에약함'],q:'“처음 오셨으면 규칙부터 확인하는 게 편할 거예요.”',
-   per:'침착·절제·독립·분석. 불필요한 신경전은 피하고 관심 있는 일엔 과감히 투자한다. 예상 밖의 솔직함에 약하다.',mot:'예측 불가능한 환경에서 자신의 취향이 어떻게 변하는지 경험.',life:'현대미술 · 클래식 · 와인 · 수영 · 혼자 보내는 아침'}
+   per:'침착 · 절제 · 분석적',mot:'낯선 곳에서 내 취향이 어떻게 변할지 궁금해서',life:'현대미술 · 클래식 · 수영'}
  ],
  houseName:'AFTER DARK HOUSE',houseKo:'애프터 다크 하우스',
  houseLead:'짙은 월넛 벽에 번지는 금빛 조명, 버건디 벨벳과 검은 대리석. 밤이 깊을수록 빛나는 집입니다.',
@@ -480,8 +533,7 @@ function render(key,fromUser){
   [].forEach.call(hero.querySelectorAll('.slide'),function(x){x.remove()});
   d.heroes.forEach(function(h,i){var im=document.createElement('img');im.className='slide'+(i===0?' on':'');im.src=A+h;im.alt=d.ko+' 출연진 단체 사진';hero.insertBefore(im,hero.firstChild)});
   $('hdots').innerHTML=d.heroes.map(function(_,i){return '<i'+(i===0?' class="on"':'')+'></i>'}).join('');
-  var hi=0;clearInterval(heroT);
-  heroT=setInterval(function(){var sl=hero.querySelectorAll('.slide'),dt=$('hdots').children;if(!sl.length)return;hi=(hi+1)%sl.length;[].forEach.call(sl,function(x,j){x.classList.toggle('on',sl.length-1-j===hi)});[].forEach.call(dt,function(x,j){x.className=j===hi?'on':''})},5200);
+  hi=0;heroAuto();
   $('heyebrow').textContent=d.eyebrow;
   $('htitle').innerHTML=d.title;
   $('hko').textContent=d.ko;
@@ -514,7 +566,7 @@ function render(key,fromUser){
     '<div class="grid-ph">'+RESORT.map(function(p,i){return '<button class="ph'+(i===0?' wide':'')+'" data-gal="resort" data-i="'+i+'">'+img('place-resort-'+(p[0]<10?'0':'')+p[0]+'.png',p[1])+'<span>'+esc(p[1])+'</span></button>'}).join('')+'</div>';
 
   h+=sec('crew','THE JINGLE CREW','제작진','')+
-    '<div class="crew">'+CREW.map(function(c,i){return '<button class="cr" data-crew="'+i+'"><div class="im">'+img('crew-'+c.id+'-01.png',c.n)+'</div><div class="tx"><div class="ro">'+esc(c.ro)+'</div><div class="n">'+esc(c.n)+'</div></div></button>'}).join('')+'</div>';
+    '<div class="crew">'+CREW.map(function(c,i){return '<button class="cr" data-crew="'+i+'"><div class="im">'+img('crew-'+c.id+'-01.png',c.n)+'</div><div class="tx"><div class="ro">'+esc(c.ro)+'</div><div class="n">'+esc(c.n)+'</div>'+(c.s?'<p>'+esc(c.s)+'</p>':'')+'</div></button>'}).join('')+'</div>';
 
   var c=$('content');c.innerHTML=h;c.classList.remove('fade');void c.offsetWidth;c.classList.add('fade');
 
@@ -522,6 +574,16 @@ function render(key,fromUser){
 
   if(fromUser){window.scrollTo({top:0,behavior:'smooth'})}
 }
+/* hero slides: male cast ↔ female cast */
+var hi=0;
+function heroShow(n){
+  var hero=$('hero'),sl=hero.querySelectorAll('.slide'),dt=$('hdots').children;if(!sl.length)return;
+  hi=(n+sl.length)%sl.length;
+  [].forEach.call(sl,function(x,j){x.classList.toggle('on',sl.length-1-j===hi)});
+  [].forEach.call(dt,function(x,j){x.className=j===hi?'on':''});
+}
+function heroAuto(){clearInterval(heroT);heroT=setInterval(function(){heroShow(hi+1)},6000)}
+function heroStep(d){heroShow(hi+d);heroAuto()}
 function sec(id,en,ko,hint){return '<section id="'+id+'"><div class="sh"><h2><small>'+esc(en)+'</small>'+esc(ko)+'</h2><span class="hint">'+esc(hint)+'</span></div>'}
 function makeSnow(key){
   var s=$('snow'),n=key==='s1'?36:26,h='';
@@ -541,6 +603,7 @@ $('lb').addEventListener('click',function(e){if(e.target===this)closeLB()});
 
 function openCast(i){
   var c=cur.cast[i],key=cur.key;
+  $('mbox').className='mbox';
   $('mbox').innerHTML='<button class="mx" aria-label="닫기">✕</button><div class="mtop"><div class="im">'+img(faceOf(c,key),c.n,false)+'<span class="mtag">'+(key==='s1'?'SEASON 01':'SEASON 02')+' · CAST</span></div><div class="mtx">'+
    '<span class="tg">'+esc(cur.ko)+'</span><div class="nm" style="margin-top:6px">'+esc(c.n)+' <small>'+c.a+'세 · '+c.g+'</small></div><div class="rl" style="font-size:14px">'+esc(c.job)+'</div><div style="font-size:14px;font-style:italic;color:var(--acc);margin:4px 0">'+esc(c.q)+'</div>'+
    '<dl class="prof"><dt>신체</dt><dd>'+c.h+' · 생일 '+c.b+' · '+c.smoke+'</dd><dt>헤어</dt><dd>'+esc(c.hair)+'</dd><dt>눈</dt><dd>'+esc(c.eye)+'</dd><dt>향</dt><dd>'+esc(c.scent)+'</dd><dt>성격</dt><dd>'+esc(c.per)+'</dd><dt>출연 계기</dt><dd>'+esc(c.mot)+'</dd><dt>취미·일상</dt><dd>'+esc(c.life)+'</dd></dl>'+
@@ -549,7 +612,8 @@ function openCast(i){
 }
 function openCrew(i){
   var c=CREW[i];
-  $('mbox').innerHTML='<button class="mx" aria-label="닫기">✕</button><div class="mtop"><div class="im">'+img('crew-'+c.id+'-01.png',c.n,false)+'<span class="mtag">THE JINGLE CREW</span></div><div class="mtx"><div class="nm" style="margin-top:6px">'+esc(c.n)+' <small>'+esc(c.ro)+'</small></div></div></div>';
+  $('mbox').className='mbox crewbox';
+  $('mbox').innerHTML='<button class="mx" aria-label="닫기">✕</button><div class="mcrew">'+img('crew-'+c.id+'-01.png',c.n,false)+'<span class="mtag">THE JINGLE CREW</span><div class="cap2"><div class="ro">'+esc(c.ro)+'</div><div class="n">'+esc(c.n)+'</div>'+(c.s?'<div class="s">'+esc(c.s)+'</div>':'')+'</div></div>';
   bindModal();
 }
 function bindModal(list){
@@ -575,17 +639,35 @@ $('content').addEventListener('click',function(e){
 [].forEach.call(document.querySelectorAll('.gnb a'),function(a){a.addEventListener('click',function(e){e.preventDefault();var el=$(a.getAttribute('href').slice(1));if(el)el.scrollIntoView({behavior:'smooth'})})});
 
 /* ── SEASON SWITCH ───────────────────────── */
+/* season intro splash: S1 on first visit, S2 (with age check) on every entry */
+var SPLASH={
+ s1:{bg:'s1-group-2.png',html:'<div class="ilogo">JINGLE<b>·</b>TV<span>PRESENTS</span></div><div class="iribbon">CHRISTMAS DATING REALITY</div><h1 class="ititle">MISTLETOE</h1><div class="isub">SEASON 01 · 《미슬토우》</div><p class="ihook">겨울, 사랑이 내리는 순간.</p><div class="imeta"><em>ALL</em>전체 이용가 · 11.24 FIRST SNOW</div><button class="ienter" id="spOk">❄ 입장하기</button><button class="iswap" id="spSwap">시즌 2 · AFTER DARK로 가기 ›</button>'},
+ s2:{bg:'s2-group-1.png',html:'<div class="ilogo">JINGLE<b>·</b>TV<span>LATE NIGHT</span></div><div class="g19">19</div><h1 class="ititle">AFTER DARK</h1><div class="isub">MISTLETOE · SEASON 02</div><p class="ihook">겨울, 마음이 가장 뜨거워지는 밤.</p><p class="iwarn">이 프로그램은 성인 대상입니다.<br>음주·흡연 장면이 포함됩니다.<br><b>만 19세 이상이신가요?</b></p><button class="ienter" id="spOk">19세 이상, 입장하기</button><button class="iswap" id="spSwap">시즌 1로 돌아가기</button>'}
+};
+function showSplash(key){
+  var S=SPLASH[key],sp=$('splash');
+  sp.setAttribute('data-k',key);
+  $('ibg').style.backgroundImage='url('+A+S.bg+')';
+  var fx='',n=key==='s1'?44:30;
+  for(var i=0;i<n;i++){var sz=key==='s1'?(2+Math.random()*5):(1.5+Math.random()*2.5);fx+='<i style="left:'+(Math.random()*100)+'%;width:'+sz+'px;height:'+sz+'px;animation-duration:'+(7+Math.random()*9)+'s;animation-delay:-'+(Math.random()*14)+'s;opacity:'+(.4+Math.random()*.6)+'"></i>'}
+  $('ifx').innerHTML=fx;
+  $('ibox').innerHTML=S.html;
+  sp.classList.add('on');document.body.style.overflow='hidden';
+  $('spOk').onclick=function(){hideSplash();if(!cur||cur.key!==key)render(key,true)};
+  $('spSwap').onclick=key==='s1'?function(){showSplash('s2')}:function(){hideSplash();if(!cur||cur.key!=='s1')render('s1');else{try{history.replaceState(null,'','#s1')}catch(e){}}};
+  $('spOk').focus();
+}
+function hideSplash(){$('splash').classList.remove('on');document.body.style.overflow=''}
 function go(key,fromUser){
-  if(key==='s2'){$('gate').classList.add('on');return}
+  if(key==='s2'){showSplash('s2');return}
   render(key,fromUser);
 }
-$('gateOk').onclick=function(){$('gate').classList.remove('on');render('s2',true)};
-$('gateNo').onclick=function(){$('gate').classList.remove('on');if(!cur||cur.key!=='s1')render('s1');else{try{history.replaceState(null,'','#s1')}catch(e){}}};
 [].forEach.call(document.querySelectorAll('.sbtn'),function(b){b.onclick=function(){var k=b.getAttribute('data-s');if(!cur||cur.key!==k)go(k,true)}});
-$('prevS').onclick=$('nextS').onclick=function(){go(cur.key==='s1'?'s2':'s1',false)};
+$('prevS').onclick=function(){heroStep(-1)};
+$('nextS').onclick=function(){heroStep(1)};
 (function(){var h=$('hero'),x0=null,y0=null;
   h.addEventListener('touchstart',function(e){x0=e.touches[0].clientX;y0=e.touches[0].clientY},{passive:true});
-  h.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur.key==='s1'?'s2':'s1',false);x0=null},{passive:true});
+  h.addEventListener('touchend',function(e){if(x0===null)return;var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)heroStep(dx<0?1:-1);x0=null},{passive:true});
 })();
 window.addEventListener('hashchange',function(){var k=location.hash.replace('#','');if((k==='s1'||k==='s2')&&cur&&k!==cur.key)go(k,false)});
 
@@ -602,7 +684,7 @@ function tick(){
 tick();setInterval(tick,1000);
 
 var init=location.hash.replace('#','');
-if(init==='s2')go('s2');else render('s1');
+render('s1');showSplash(init==='s2'?'s2':'s1');
 })();
 </script>
 </body>
