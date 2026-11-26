@@ -70,8 +70,8 @@ s1:{rate:'all',mont:M1,end:{bg:'s1-group-2.png',dim:'rgba(244,236,223,.55)',titl
   [beats(4),sQuote('taegyeom','돌려 말하는 건 잘 못해요. 같이 걸을래요?'),'quote'],
   [beats(4),sQuote('haerin','첫인상으로 판단하진 않아요. 기억은 해 두지만요.'),'quote'],
   [beats(7),sGrid('그리고, 아직 도착하지 않은 한 사람'),'grid'],
-  [ASK,sBig(['첫인상은,','!그대로일까']),'ask'],
-  [ASK,sBig(['크리스마스 아침은,','!누구와 맞이할까']),'ask'],
+  [ASK,sBig(['같은 집, 같은 겨울','!마음은 조금씩 움직인다']),'ask'],
+  [ASK,sBig(['그리고 크리스마스,','!한 사람에게 닿는다']),'ask'],
   [6000,sMontage(M1),'mont'],
   [6500,sTitle('JINGLE TV ORIGINAL','MISTLETOE','SEASON 01 · 《미슬토우》','겨울, 사랑이 내리는 순간.','radial-gradient(circle at 50% 45%,#fffaf2,#efe3d0 75%)'),'title']
  ]},
