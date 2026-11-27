@@ -122,10 +122,10 @@ section{padding-top:8px}
 
 /* cast */
 .cast{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
-.cc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;text-align:left;padding:0}
+.cc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:transform .25s,box-shadow .25s;text-align:left;padding:0;display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
 .cc:hover{transform:translateY(-4px)}
-.cc .im{aspect-ratio:3/4;overflow:hidden;background:var(--bg2);position:relative}
-.cc img{width:100%;height:100%;object-fit:cover;object-position:center 18%;transition:transform .6s}
+.cc .im{aspect-ratio:3/4;overflow:hidden;background:var(--bg2);position:relative;width:100%;flex:none}
+.cc img{width:100%;height:100%;object-fit:cover;object-position:center 18%;transition:transform .6s;display:block}
 .cc:hover img{transform:scale(1.05)}
 .cc .im:after{content:"";position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(180deg,transparent,rgba(0,0,0,.72))}
 .cc .quote{position:absolute;left:12px;right:12px;bottom:10px;z-index:2;color:#fff;font-size:13px;font-weight:500;line-height:1.45;text-shadow:0 1px 4px rgba(0,0,0,.6)}
@@ -208,9 +208,9 @@ section{padding-top:8px}
 
 /* crew */
 .crew{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:16px}
-.cr{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;text-align:left;box-shadow:var(--shadow)}
-.cr .im{aspect-ratio:1/1;overflow:hidden}
-.cr img{width:100%;height:100%;object-fit:cover;object-position:center 15%}
+.cr{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;cursor:pointer;padding:0;text-align:left;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch}
+.cr .im{aspect-ratio:1/1;overflow:hidden;width:100%;flex:none}
+.cr img{width:100%;height:100%;object-fit:cover;object-position:center 15%;display:block}
 .cr .tx{padding:10px 12px 12px}
 .cr .ro{font-size:10.5px;font-weight:900;letter-spacing:1px;color:var(--acc)}
 .cr .n{font-size:15.5px;font-weight:900}
